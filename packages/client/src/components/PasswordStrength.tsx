@@ -5,12 +5,11 @@ design by Neven Solidov.
 
 import { useEffect, useState } from "react";
 import "./PasswordStrength.css";
-import {
-  validatePassword,
-  ValidationResult,
-  allRulesAreValid,
-} from "@mariusbongarts/medium-monorepo-shared";
-import { passwordService } from "../services/password-service";
+// import {
+//   validatePassword,
+//   ValidationResult,
+//   allRulesAreValid,
+// } from "@justiceotuya/gaming-dashboard-monorepo-shared";
 import { LoadingSpinner } from "./LoadingSpinner";
 
 const lockIcon = {
@@ -25,39 +24,39 @@ export const PasswordStrength = () => {
   const [isLocked, setIsLocked] = useState(false);
   const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
-  const [validationResults, setValidationResults] = useState<
-    ValidationResult[]
-  >(validatePassword(password));
-  const [serverValidationResults, setServerValidationResults] =
-    useState<ValidationResult[]>();
+  // const [validationResults, setValidationResults] = useState<
+  //   ValidationResult[]
+  // >(validatePassword(password));
+  // const [serverValidationResults, setServerValidationResults] =
+  //   useState<ValidationResult[]>();
 
   const handleChange = (e: any) => {
     setPassword(e.target.value.trim());
   };
 
-  useEffect(() => {
-    updateValidationResults(password);
-  }, [password]);
+  // useEffect(() => {
+  //   updateValidationResults(password);
+  // }, [password]);
 
-  const updateValidationResults = (value: string) => {
-    const validationResults = validatePassword(value);
-    setValidationResults(validationResults);
-  };
+  // const updateValidationResults = (value: string) => {
+  //   const validationResults = validatePassword(value);
+  //   setValidationResults(validationResults);
+  // };
 
-  useEffect(() => {
-    setIsLocked(allRulesAreValid(validationResults));
-  }, [validationResults]);
+  // useEffect(() => {
+  //   setIsLocked(allRulesAreValid(validationResults));
+  // }, [validationResults]);
 
-  const submit = async () => {
-    setServerValidationResults(undefined);
-    setLoading(true);
-    const validationResults = await passwordService.checkPassword(password);
-    // Add a timeout for some loading animation
-    setTimeout(() => {
-      setLoading(false);
-      setServerValidationResults(validationResults);
-    }, ANIMATION_TIMEOUT_MILLIS);
-  };
+  // const submit = async () => {
+  //   setServerValidationResults(undefined);
+  //   setLoading(true);
+  //   const validationResults = await passwordService.checkPassword(password);
+  //   // Add a timeout for some loading animation
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //     setServerValidationResults(validationResults);
+  //   }, ANIMATION_TIMEOUT_MILLIS);
+  // };
 
   useEffect(() => {
     if (isLocked) {
@@ -66,7 +65,7 @@ export const PasswordStrength = () => {
       }, ANIMATION_TIMEOUT_MILLIS);
       return () => clearTimeout(timeout);
     } else {
-      setServerValidationResults(undefined);
+      // setServerValidationResults(undefined);
       setLock(lockIcon.open);
     }
   }, [isLocked]);
@@ -74,14 +73,14 @@ export const PasswordStrength = () => {
   return (
     <div className="App">
       <div className="form-box">
-        <ValidationItems validationResults={validationResults} />
+        {/* <ValidationItems validationResults={validationResults} /> */}
         <FormField
           lock={lock}
           handleChange={handleChange}
           isLocked={isLocked}
           value={password}
         />
-        <button className="submit-btn" disabled={!isLocked} onClick={submit}>
+        <button className="submit-btn" disabled={!isLocked} onClick={() => console.log('clicked')}>
           Submit
         </button>
         {loading && (
@@ -89,15 +88,15 @@ export const PasswordStrength = () => {
             <LoadingSpinner />
           </div>
         )}
-        {serverValidationResults && (
+        {/* {serverValidationResults && (
           <ValidationItems validationResults={serverValidationResults} />
-        )}
+        )} */}
       </div>
       <a
         className="github-button"
-        href="https://github.com/MariusBongarts/medium-monorepo"
+        href="https://github.com/justiceotuya/medium-monorepo"
         target="_blank"
-        rel="noreferrer"
+        rel="noreferrer noopener"
       >
         ★ on Github
       </a>
@@ -128,25 +127,25 @@ const ValidationIcon = ({ isDone }: ValidationIconProps) => {
   );
 };
 
-const ValidationItems = ({
-  validationResults,
-}: {
-  validationResults: ValidationResult[];
-}) => (
-  <ul className="validation-box">
-    {validationResults.map((item) => (
-      <li
-        className={item.valid ? `done validation-item` : "validation-item"}
-        key={item.id}
-      >
-        <span className="validation-icon">
-          <ValidationIcon isDone={item.valid} />
-        </span>
-        {item.name}
-      </li>
-    ))}
-  </ul>
-);
+// const ValidationItems = ({
+//   validationResults,
+// }: {
+//   validationResults: ValidationResult[];
+// }) => (
+//   <ul className="validation-box">
+//     {validationResults.map((item) => (
+//       <li
+//         className={item.valid ? `done validation-item` : "validation-item"}
+//         key={item.id}
+//       >
+//         <span className="validation-icon">
+//           <ValidationIcon isDone={item.valid} />
+//         </span>
+//         {item.name}
+//       </li>
+//     ))}
+//   </ul>
+// );
 
 const FormField = ({ lock, handleChange, isLocked, value }: any) => {
   return (

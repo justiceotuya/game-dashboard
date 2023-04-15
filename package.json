@@ -1,5 +1,5 @@
 {
-  "name": "medium-monorepo",
+  "name": "gaming-dashboard-monorepo",
   "description": "Mono-respository with React client, express server and shared typescript module",
   "version": "1.0.0",
   "main": "index.js",
@@ -8,10 +8,10 @@
   "private": true,
   "scripts": {
     "start": "yarn workspaces foreach -pi run start",
+    "dev": "yarn workspaces foreach -pi run dev",
     "build": "yarn workspaces foreach -pti run build",
-    "start:server": "yarn workspace @mariusbongarts/medium-monorepo-server run start",
-    "start:client": "yarn workspace @mariusbongarts/medium-monorepo-client run start",
-    "start:shared": "yarn workspace @mariusbongarts/medium-monorepo-shared run start"
+    "start:server": "yarn workspace @justiceotuya/gaming-dashboard-monorepo-server run start",
+    "start:client": "yarn workspace @justiceotuya/gaming-dashboard-monorepo-client run start"
   },
   "workspaces": {
     "packages": [
