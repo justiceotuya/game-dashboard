@@ -38,7 +38,7 @@ server.use(pause(1000));
 server.use(router)
 let PORT = process.env.PORT || 8000;
 server.listen(PORT, () => {
-    console.log('JSON Server is running in ' + isProductionEnv + ' mode, at ' + PORT )
+    console.log('JSON Server is running in ' + process.env.NODE_ENV + ' mode, at ' + PORT )
 })
 
 // Export the Server API

@@ -1,13 +1,18 @@
-import React from "react";
-import "./App.css";
-import { PasswordStrength } from "./components/PasswordStrength";
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
 
 function App() {
+  const [count, setCount] = useState(0)
+
   return (
-    <div id="App">
-      <PasswordStrength />
+    <div className="App">
+     <h1 className="text-3xl font-bold text-red-200 underline">
+      Hello world!
+    </h1>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
