@@ -3,7 +3,7 @@ import fs from 'fs';
 import jsonServer, { JsonServerRouter } from 'json-server'
 import clone from 'clone'
 import data from './db.json';
-import pause from 'connect-pause';
+// import pause from 'connect-pause';
 
 
 
@@ -27,13 +27,14 @@ server.use(jsonServer.bodyParser);
 
 server.use((req, _res, next) => {
   if (req.method === 'POST') {
-    req.body.createdAt = Date.now()
+    console.log('POST request received')
+    req.body.created_at = Date.now()
   }
   // Continue to JSON Server router
   next()
 })
 
-server.use(pause(1000));
+// server.use(pause(15000));
 server.use(router)
 let PORT = process.env.PORT || 8000;
 server.listen(PORT, () => {

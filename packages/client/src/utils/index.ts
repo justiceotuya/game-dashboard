@@ -15,3 +15,14 @@ export function toSentenceCase(str:string) {
 
   return sentenceCaseStr;
 }
+
+
+export function formatPhoneNumber(phoneNumber: string): string {
+  if(!phoneNumber) return phoneNumber;
+  // Strip all characters from the input except digits
+  const cleaned = phoneNumber.replace(/\D/g, '');
+  const areaCode = cleaned.slice(0, 3);
+  const exchange = cleaned.slice(3, 6);
+  const lineNumber = cleaned.slice(6, 10);
+  return `${areaCode}-${exchange}-${lineNumber}`;
+}
