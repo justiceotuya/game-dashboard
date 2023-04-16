@@ -1,28 +1,30 @@
-// import { DOTS, formatter, formatDate } from '../helpers/util'
-import { EyeIcon, LinkIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
+import {Link} from 'react-router-dom'
+import {  PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
 import { toSentenceCase } from '../../utils'
 type Props = {
-  data: any
-  // headers:any
+  data: Record<string, any>[] | []
+  name: string
 }
 
 const Table = (props: Props) => {
-  const {data} = props
+  const {data,name} = props
   const headers = data.length ? Object.keys(data[0])?.map(toSentenceCase) : []
+
+  const sentenceCasedName = toSentenceCase(name)
 
   return (
     <section className="container overflow-hidden mx-auto">
       <div className="sm:flex sm:items-center sm:justify-between">
           <div className="flex items-center gap-x-3">
             <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full ">
-              2 items
+              {data.length} {data?.length > 1 ? "items" : 'item'}
             </span>
           </div>
 
           <div className="flex items-center mt-4 gap-x-3">
-            <button
+            <Link
               className="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600 "
-              // onClick={handleNewForm}
+              to={`/${name}/new`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -39,8 +41,8 @@ const Table = (props: Props) => {
                 />
               </svg>
 
-              <span>Add / Create new</span>
-            </button>
+            <span>Add {sentenceCasedName }</span>
+            </Link>
           </div>
       </div>
 
@@ -127,7 +129,7 @@ const Table = (props: Props) => {
                       </tr>
                     </thead>
 
-                    <tbody className="bg-white divide-y divide-gray-200 h-96 overflow-y-auto">
+                    <tbody className="bg-white divide-y divide-gray-200  overflow-y-auto">
                       {data.map((row:any, index:any) => (
                         <tr key={index}>
                           {
