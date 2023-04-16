@@ -6,20 +6,25 @@ import Button from '../../components/button';
 import { userProfile, userProfileInputs, userValidationSchema } from './constant';
 import { TUserProfile } from './types';
 
+interface TUserForm {
+    handleSubmitForm: (val: TUserProfile) => void
+    isLoading: boolean
 
+    userProfileFromServer?: TUserProfile
+}
 
-const UserForm: React.FC = (
-    // handleSubmitForm: any
-) => {
+const UserForm = (props: TUserForm) => {
+    const { handleSubmitForm,isLoading, userProfileFromServer } = props
+    // const handleSubmitForm = (values: TUserProfile) => {
+    //     console.log({ values })
+    // }
 
-    const handleSubmitForm = (values:TUserProfile) => {
-console.log({values})
-    }
+    console.log("Test" , userProfileFromServer ?? userProfile)
 
     return (
         <div className="flex flex-col gap-3 pb-3 mb-5 max-w-xl mx-auto">
             <Formik
-                initialValues={userProfile}
+                initialValues={userProfileFromServer ?? userProfile}
                 onSubmit={handleSubmitForm}
                 validationSchema={userValidationSchema}
                 enableReinitialize
@@ -38,9 +43,10 @@ console.log({values})
                                         placeholder={placeholder}
                                         required
                                         error={formik.touched[name as keyof typeof userProfile] && formik.errors[name as keyof typeof userProfile]}
-                                        // value={formik.values[name]}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
+                                        disabled={isLoading}
+                                        value={formik.values[name as keyof typeof userProfile]}
                                     />
                                 )
                             }
@@ -51,8 +57,8 @@ console.log({values})
                                     text="Submit Form"
                                     type="submit"
                                     onClick={() => formik.handleSubmit()}
-                                // disabled={Object.keys(errors).some((item) => item)}
-                                isLoading={true}
+                                    // disabled={Object.keys(errors).some((item) => item)}
+                                    isLoading={isLoading}
                                 />
                                 {/* <p>Values:  {
                                     JSON.stringify(formik.values)

@@ -7,6 +7,7 @@ export const userProfile = {
     first_name: '',
     last_name: '',
     address: '',
+    phone_number: '',
 }
 
 export const userProfileInputs = [
@@ -31,6 +32,13 @@ export const userProfileInputs = [
         placeholder: 'e.g email@provider.com',
         required: true,
     },
+    {
+        name: 'phone_number',
+        type: 'text',
+        label: 'Phone Number',
+        placeholder: '33434934933',
+        required: true,
+    },
 
     {
         name: 'address',
@@ -46,4 +54,7 @@ export const userValidationSchema = Yup.object({
     first_name: Yup.string().required('Required'),
     last_name: Yup.string().required('Required'),
     address: Yup.string().required('Required'),
+    phone_number: Yup.string()
+    .required('Phone number is required')
+    .matches(/^\d{10}$/i, 'Phone number must be 10 digits'),
 })
