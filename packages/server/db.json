@@ -1,59 +1,12 @@
 {
   "users": [
     {
-      "id": "1",
-      "name": "User 1",
-      "username": "username1",
-      "email": "user1@example.com"
-    },
-    {
-      "name": "User 1",
-      "username": "username1",
-      "email": "user1@example.com",
-      "createdAt": 1681597936458,
-      "id": "DQTQaKm"
-    },
-    {
-      "name": "User 1",
-      "username": "username1",
-      "email": "user1@example.com",
-      "createdAt": 1681597939549,
-      "id": "Dc3BWoD"
-    },
-    {
-      "name": "User 1",
-      "username": "username1",
-      "email": "user1@example.com",
-      "createdAt": 1681597942627,
-      "id": "WukdfwL"
-    },
-    {
-      "name": "User 1",
-      "username": "username1",
-      "email": "user1@example.com",
-      "createdAt": 1681597965333,
-      "id": "fdolwWj"
-    },
-    {
-      "name": "User 1",
-      "username": "username1",
-      "email": "user1@example.com",
-      "createdAt": 1681597967519,
-      "id": "pk59Z3z"
-    },
-    {
-      "name": "User 1",
-      "username": "username1",
-      "email": "user1@example.com",
-      "createdAt": 1681597969444,
-      "id": "xSBJg40"
-    },
-    {
-      "name": "User 1",
-      "username": "username1",
-      "email": "user1@example.com",
-      "createdAt": 1681597971537,
-      "id": "oQGNfWT"
+      "user_id": 1,
+      "first_name": "Jane",
+      "last_name": "Smith",
+      "email": "jane.smith@example.com",
+      "address": "456 Elm St.",
+      "phone_number": "555-987-6543"
     }
   ]
 }

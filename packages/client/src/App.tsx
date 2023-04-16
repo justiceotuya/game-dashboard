@@ -6,6 +6,15 @@ import {
   Navigate,
   useRoutes
 } from "react-router-dom";
+
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import Layout from './components/layout'
 import Dashboard from './pages/dashboard';
 import Users from './pages/users';
@@ -14,11 +23,13 @@ import GamesPlay from './pages/game-play';
 import { ErrorPage } from './pages/error';
 import CreateUser from './pages/users/create-user';
 
+const queryClient = new QueryClient()
+
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="App">
+    <QueryClientProvider client={queryClient}>
       <Routes>
           <Route  element={<Layout />}>
           <Route  path="/" element={<Navigate to="/dashboard" replace />}  />
@@ -29,8 +40,9 @@ function App() {
           <Route path="/game-play" element={<GamesPlay />} />
           </Route>
           <Route path ='*' element={<ErrorPage />} />
-        </Routes>
-    </div>
+      </Routes>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   )
 }
 
