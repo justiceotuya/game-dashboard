@@ -22,11 +22,11 @@ import Games from './pages/games';
 import GamesPlay from './pages/game-play';
 import { ErrorPage } from './pages/error';
 import CreateUser from './pages/users/create-user';
+import EditUser from './pages/users/edit-user';
 
-const queryClient = new QueryClient()
+export const queryClient = new QueryClient()
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -36,6 +36,7 @@ function App() {
           <Route  path="/dashboard" element={<Dashboard />}  />
           <Route  path="/users" element={<Users />}  />
           <Route  path="/users/new" element={<CreateUser />}  />
+          <Route  path="/users/:id/edit" element={<EditUser />}  />
           <Route  path="/games" element={<Games />}  />
           <Route path="/game-play" element={<GamesPlay />} />
           </Route>

@@ -23,6 +23,7 @@ const Input = (props: Props) => {
     disabled = false,
     error,
     optional,
+    value
   } = props
 
 
@@ -52,6 +53,7 @@ const Input = (props: Props) => {
           placeholder={placeholder}
           disabled={disabled}
           required={required}
+        value={value}
           {...props}
         />
       </div>
