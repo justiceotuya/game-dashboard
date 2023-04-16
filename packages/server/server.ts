@@ -1,16 +1,14 @@
-// const jsonServer = require('json-server')
-// const clone = require('clone')
-// const data = require('./db.json')
-const fs = require('fs');
+import express from 'express'
+import fs from 'fs';
 import jsonServer, { JsonServerRouter } from 'json-server'
 import clone from 'clone'
 import data from './db.json';
-const pause = require('connect-pause');
+import pause from 'connect-pause';
 
 
 
 const isProductionEnv = process.env.NODE_ENV === 'production'
-const server = jsonServer.create()
+const server:express.Application = jsonServer.create()
 
 // For mocking the POST request, POST request won't make any changes to the DB in production environment
 // const router = jsonServer.router(isProductionEnv ? clone(data) : 'db.json', {
@@ -26,14 +24,15 @@ const middlewares = jsonServer.defaults()
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
 
-// var routes =  JSON.parse(fs.readFileSync('db.json'));
-// server.use(jsonServer.rewriter(routes));
 
-// server.use((req, _res, next) => {
-//     if (req.path !== '/')
-//         router.db.setState(clone(data))
-//     next()
-// })
+server.use((req, _res, next) => {
+  if (req.method === 'POST') {
+    req.body.createdAt = Date.now()
+  }
+  // Continue to JSON Server router
+  next()
+})
+
 server.use(pause(1000));
 server.use(router)
 let PORT = process.env.PORT || 8000;

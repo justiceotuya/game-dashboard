@@ -2,7 +2,10 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "commonjs",
-    "lib": ["esnext", "dom"],
+    "lib": [
+      "esnext",
+      "dom"
+    ],
     "moduleResolution": "node",
     "allowJs": true,
     "strict": true,
@@ -22,12 +25,23 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "declaration": true,
-    "typeRoots": ["./types", "./node_modules/@types"],
+    "typeRoots": [
+      "./types",
+      "./node_modules/@types"
+    ],
     "baseUrl": "./",
     "paths": {
-      "*": ["types/*"]
+      "*": [
+        "types/*"
+      ]
     }
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["./types/", "./node_modules", "../../node_modules"]
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": [
+    "./types/",
+    "./node_modules",
+    "../../node_modules"
+  ]
 }
