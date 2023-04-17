@@ -1,17 +1,17 @@
 import React, { Fragment, ReactNode, useEffect, useState, useLayoutEffect } from 'react'
-import { Link, NavLink,Outlet } from "react-router-dom";
-import {ReactComponent as LogoIcon} from '../../assets/logo.svg'
+import { Link, NavLink, Outlet } from "react-router-dom";
+import { ReactComponent as LogoIcon } from '../../assets/logo.svg'
 
 const data = [
   { name: 'Dashboard', url: '/dashboard' },
   { name: 'Users', url: '/users' },
   { name: 'Games', url: '/games' },
-  { name: 'Game play', url: '/game-play' },
+  // { name: 'Game play', url: '/game-play' },
 ]
 
 const navClass = 'text-color-secondary-1 flex items-center p-2 text-base no-underline transition-colors duration-300 transform rounded-md '
 
-const Layout = (children:any) => {
+const Layout = (children: any) => {
 
   const isPageActive = (url: string) => {
     return window.location.pathname.includes(url)
@@ -81,7 +81,7 @@ const Layout = (children:any) => {
         >
 
           <Link to="/" className='p-6'>
-            <LogoIcon/>
+            <LogoIcon />
           </Link>
           <div className="relative flex flex-col flex-1 min-h-0 pt-0">
             <div className="flex flex-col flex-1 pb-4 overflow-y-auto">
@@ -94,7 +94,7 @@ const Layout = (children:any) => {
                           key={index}
                         >
                           <NavLink
-                            className={({ isActive }: { isActive: boolean }) => navClass +  (isActive && isPageActive(item.url) ? 'bg-color-primary-1/10 text-color-primary-1' : 'hover:bg-color-primary-1/10 hover:text-color-primary-1')}
+                            className={({ isActive }: { isActive: boolean }) => navClass + (isActive && isPageActive(item.url) ? 'bg-color-primary-1/10 text-color-primary-1' : 'hover:bg-color-primary-1/10 hover:text-color-primary-1')}
                             to={item.url}
                             onClick={toggleSideBar}
                           >
@@ -121,7 +121,7 @@ const Layout = (children:any) => {
           className="relative w-full min-h-[calc(100vh-4rem)] overflow-y-auto  lg:ml-64"
         >
           <main className="items-center p-3 mx-auto max-w-[1440px] lg:p-9 md:p-6 h-full">
-           <Outlet/>
+            <Outlet />
           </main>
         </div>
       </div>

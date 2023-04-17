@@ -19,9 +19,7 @@ export default {
       "color-accent-2": "rgba(16, 24, 64, 0.8)",
       "color-yellow-1": "#66460D",
       "color-yellow-2": "#FFEFD2",
-      "color-yellow-3": "#FFEFD2",
       "color-cyan-1": "#D3F5F7",
-      "color-cyan-2": "#3685D4",
       "color-navy-1": "#0F5156",
       "color-navy-2": "#D6E0FF",
       "color-error": "#D14343"

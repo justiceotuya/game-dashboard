@@ -27,10 +27,7 @@ export const useUpdateUser = () => {
         })
         return () => queryClient.setQueryData(['users'], previousUsers)
       },
-      onSuccess: () => {
-        queryClient.invalidateQueries(['users'])
-        navigate("/users")
-      },
+
     }
   )
 }
