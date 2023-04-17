@@ -8,7 +8,7 @@ const ErrorContainer = ({refetch}:ErrorProps ) => {
   return (
     <div className="flex items-center w-full mt-6 text-center border border-gray-200 rounded-lg h-96">
       <div className="flex flex-col w-full max-w-sm px-4 mx-auto">
-        <p className="mb-5 text-base font-medium text-gray-500">
+        <p className="mb-5 text-base font-medium text-color-secondary-2">
           Something went wrong, try reloading
         </p>
         <Button
@@ -36,7 +36,7 @@ const ErrorContainer = ({refetch}:ErrorProps ) => {
 //     <div className="items-center p-3 mx-auto max-w-7xl lg:p-9 md:p-6">
 //       <div className="flex items-center w-full mt-6 text-center border border-gray-200 rounded-lg h-96">
 //         <div className="flex flex-col w-full max-w-sm px-4 mx-auto">
-//           <p className="mb-5 text-xl font-medium text-gray-500">Something went wrong:</p>
+//           <p className="mb-5 text-xl font-medium text-color-secondary-2">Something went wrong:</p>
 //           <pre className="mb-5 text-base text-red-500 whitespace-pre-line">{error.message}</pre>
 
 //           <Button

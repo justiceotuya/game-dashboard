@@ -6,6 +6,8 @@ import { useGetUsers } from './hooks/useGetUsers'
 import TableSkeleton from '../../components/table-skeleton'
 import ErrorContainer from '../../components/error-container'
 import { useDeleteUser } from './hooks/useDeleteUser'
+import Modal from '../../components/modal'
+import { useCreateUserModal } from './create-user'
 
 type Props = {}
 
@@ -13,24 +15,30 @@ type Props = {}
 
 const Users = (props: Props) => {
   const { data, isLoading, error, refetch } = useGetUsers()
-  const { mutate:deleteUser} = useDeleteUser()
+  const deleteQuery = useDeleteUser()
 
-  const handleDeleteData = (id: string) => {
-    deleteUser(id)
-  }
+  const createUserModal = useCreateUserModal()
+  // const { mutate:deleteUser, isLoading:isRowDeleting} = useDeleteUser()
+
+  // const handleDeleteData = (id: string) => {
+  //   deleteUser(id)
+  // }
 
   return (
     <>
-      <h1 className='text-2xl'>Users</h1>
       {isLoading && <TableSkeleton />}
       {!isLoading && error && <ErrorContainer refetch={refetch} />}
       {data && (
         <Table
           data={data}
           name="users"
-          handleDeleteRow={handleDeleteData}
+          deleteQuery={deleteQuery}
+          // handleDeleteRow={handleDeleteData}
+          // isRowDeleting={isRowDeleting}
+          createNewItem= {createUserModal.show}
         />
       )}
+      {createUserModal.render()}
     </>
 
   )

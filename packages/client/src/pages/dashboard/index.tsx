@@ -5,7 +5,7 @@ type Props = {}
 
 const Dashboard = (props: Props) => {
     return (
-           <h1 className='text-2xl'>Dashboard</h1>
+           <h1 className='text-2xl  text-color-accent-1 font-semibold '>Dashboard</h1>
   )
 }
 

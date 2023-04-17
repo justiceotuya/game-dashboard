@@ -1,8 +1,6 @@
 import React, { Fragment, ReactNode, useEffect, useState, useLayoutEffect } from 'react'
 import { Link, NavLink,Outlet } from "react-router-dom";
-type Props = {
-  children: ReactNode
-}
+import {ReactComponent as LogoIcon} from '../../assets/logo.svg'
 
 const data = [
   { name: 'Dashboard', url: '/dashboard' },
@@ -11,7 +9,7 @@ const data = [
   { name: 'Game play', url: '/game-play' },
 ]
 
-const navClass = 'text-gray-800 flex items-center p-2 text-base no-underline transition-colors duration-300 transform rounded-md '
+const navClass = 'text-color-secondary-1 flex items-center p-2 text-base no-underline transition-colors duration-300 transform rounded-md '
 
 const Layout = (children:any) => {
 
@@ -33,7 +31,7 @@ const Layout = (children:any) => {
                 onClick={toggleSideBar}
                 aria-expanded="true"
                 aria-controls="sidebar"
-                className={`p-2 mr-2 text-gray-800 rounded cursor-pointer   lg:hidden`}
+                className={`p-2 mr-2 text-color-secondary-1 rounded cursor-pointer   lg:hidden`}
                 title='toggle sidebar'
               >
                 <svg
@@ -77,12 +75,16 @@ const Layout = (children:any) => {
       <div className="flex pt-16 lg:pt-0 overflow-hidden bg-white">
         <aside
           id="sidebar"
-          className={`fixed top-0 left-0 z-20 border  bg-white flex-col flex-shrink-0 w-64 h-full pt-16 duration-75 lg:flex transition-width ${isSidebarOpen ? 'flex' : 'hidden'
+          className={`fixed top-0 left-0 z-20 border border-color-secondary-4 bg-color-white flex-col flex-shrink-0 w-64 h-full duration-75 lg:flex transition-width ${isSidebarOpen ? 'flex' : 'hidden'
             }`}
           aria-label="Sidebar"
         >
+
+          <Link to="/" className='p-6'>
+            <LogoIcon/>
+          </Link>
           <div className="relative flex flex-col flex-1 min-h-0 pt-0">
-            <div className="flex flex-col flex-1 pt-5 pb-4 overflow-y-auto">
+            <div className="flex flex-col flex-1 pb-4 overflow-y-auto">
               <div className="flex-1 px-3 space-y-1  divide-y">
                 {data?.length ? (
                   <ul className="pb-2 pl-0 space-y-2">
@@ -92,7 +94,7 @@ const Layout = (children:any) => {
                           key={index}
                         >
                           <NavLink
-                            className={({ isActive }: { isActive: boolean }) => navClass +  (isActive && isPageActive(item.url) ? 'bg-gray-200' : 'hover:bg-gray-200')}
+                            className={({ isActive }: { isActive: boolean }) => navClass +  (isActive && isPageActive(item.url) ? 'bg-color-primary-1/10 text-color-primary-1' : 'hover:bg-color-primary-1/10 hover:text-color-primary-1')}
                             to={item.url}
                             onClick={toggleSideBar}
                           >
@@ -118,7 +120,7 @@ const Layout = (children:any) => {
           id="main-content"
           className="relative w-full min-h-[calc(100vh-4rem)] overflow-y-auto  lg:ml-64"
         >
-          <main className="items-center p-3 mx-auto max-w-[1440px] lg:p-9 md:p-6">
+          <main className="items-center p-3 mx-auto max-w-[1440px] lg:p-9 md:p-6 h-full">
            <Outlet/>
           </main>
         </div>

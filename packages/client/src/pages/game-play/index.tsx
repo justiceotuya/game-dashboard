@@ -12,7 +12,7 @@ console.log(id)
   }
     return (
           <>
-       <h1 className='text-2xl'>Game Play</h1>
+       <h1 className='text-2xl  text-color-accent-1 font-semibold'>Game Play</h1>
       <Table
           data={[]}
                 name="game_plays"

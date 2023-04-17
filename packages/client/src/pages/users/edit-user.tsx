@@ -4,6 +4,8 @@ import { useLocation, useNavigate, useParams, useRoutes } from 'react-router-dom
 import { TUserProfile } from './types'
 import { useUpdateUser } from './hooks/useUpdateUser'
 import { useGetOneUser } from './hooks/useGetOneUser'
+import TableSkeleton from '../../components/table-skeleton'
+import { queryClient } from '../../App'
 
 type Props = {}
 
@@ -11,25 +13,28 @@ type Props = {}
 const {id} = useParams()
    let {state} = useLocation();
    const navigate = useNavigate()
-   console.log({
-   id
-})
-   const { isLoading, mutate: updateUser } = useUpdateUser()
-   const { isLoading:isUserDataLoading,data:userData } = useGetOneUser(id!)
 
-const userProfile = userData || state
+   const { isLoading, mutate: updateUser } = useUpdateUser()
+   const { isLoading:isUserDataLoading,data:userData, status } = useGetOneUser(id!)
+
+   const userProfile = userData || state
+   const isUserProfileLoading = !userProfile && isUserDataLoading
+  const userLoadError = !userProfile && status === "error"
 
   const handleUpdateUser = (values: TUserProfile) => {
-    updateUser(values, {
-      onSuccess: () => {
-        navigate("/users")
-      }
-    })
+    updateUser(values)
   }
 
+   if (isUserProfileLoading) {
+     return <TableSkeleton/>
+   }
+   if (userLoadError) {
+     navigate("/users")
+     return null
+   }
   return (
     <>
-      <h1 className='text-2xl'>Edit Users</h1>
+      <h1 className='text-2xl  text-color-accent-1 font-semibold'>Edit Users</h1>
       <UserForm
         handleSubmitForm={handleUpdateUser}
         isLoading={isLoading}
