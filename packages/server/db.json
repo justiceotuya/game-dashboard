@@ -1,22 +1,49 @@
 {
   "users": [
     {
-      "id": 1,
-      "first_name": "Kylex",
-      "last_name": "Jenning",
-      "email": "zudoj@mailinator.com",
-      "phone_number": "2323223232",
-      "address": "Iure sunt dolorem cu",
-      "created_at": 1681670026410
+      "email": "cinyfodav@mailinator.com",
+      "first_name": "Mollyaaaaa",
+      "last_name": "Walls",
+      "address": "Accusamus rerum eum ",
+      "phone_number": "4545454545",
+      "created_at": 1681717604293,
+      "id": 2
     },
     {
-      "email": "xysutezil@mailinator.com",
-      "first_name": "Grace",
-      "last_name": "Cobb",
-      "address": "Lorem inventore nullsasasabshjkasbhjasabhsasasasa",
-      "phone_number": "3434343434",
-      "created_at": 1681678170718,
-      "id": 2
+      "email": "kywyzuz@mailinator.com",
+      "first_name": "Sean",
+      "last_name": "Albert",
+      "address": "Quia aut in velit pa",
+      "phone_number": "2223232323",
+      "created_at": 1681717793395,
+      "id": 3
+    },
+    {
+      "email": "fixev@mailinator.com",
+      "first_name": "Asher",
+      "last_name": "White",
+      "address": "Assumenda laudantium",
+      "phone_number": "6263636363",
+      "created_at": 1681723870033,
+      "id": 4
+    },
+    {
+      "email": "sybigav@mailinator.com",
+      "first_name": "Raya",
+      "last_name": "Gibbs",
+      "address": "Expedita voluptatem",
+      "phone_number": "8130764106",
+      "created_at": 1681745931857,
+      "id": 5
+    },
+    {
+      "email": "byrahuhi@mailinator.com",
+      "first_name": "Nola",
+      "last_name": "Howard",
+      "address": "Laboriosam ut nostr",
+      "phone_number": "3949494231",
+      "created_at": 1681746812114,
+      "id": 6
     }
   ]
 }
