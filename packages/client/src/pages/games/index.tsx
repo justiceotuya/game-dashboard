@@ -1,57 +1,44 @@
-import React, { useState } from 'react'
-import Layout from '../../components/layout'
-import { toSentenceCase } from '../../utils'
 import Table from '../../components/table'
-import { useGetUsers } from './hooks/useGetGames'
-import TableSkeleton from '../../components/table-skeleton'
-import ErrorContainer from '../../components/error-container'
-import { useDeleteUser } from './hooks/useDeleteGame'
-import Modal from '../../components/modal'
-import { useCreateUserModal } from './create-user'
-import { useEditModal } from './edit-user'
-import { useDeleteModal } from './delete-user'
-
-type Props = {}
+import { useGetGames } from './hooks/useGetGames'
+import { useCreateGameModal } from './create-game'
+import { useEditModal } from './edit-game'
+import { useDeleteModal } from './delete-game'
 
 
+const Games = () => {
+  const tableDataQuery = useGetGames()
 
-const Users = (props: Props) => {
-  const { data, isLoading, error, refetch } = useGetUsers()
-  const tableDataQuery = useGetUsers()
+  const createGameModal = useCreateGameModal()
+  const editGameModal = useEditModal()
+  const deleteGameModal = useDeleteModal()
 
-  const createUserModal = useCreateUserModal()
-  const editUserModal = useEditModal()
-  const deleteUserModal = useDeleteModal()
-
-  // const { mutate:deleteUser, isLoading:isRowDeleting} = useDeleteUser()
 
   const handleeditRowItem = (row: Record<string, any>) => {
-    editUserModal.show(row)
+    editGameModal.show(row)
   }
 
   const handleDeleteRow = (row: Record<string, any>) => {
-    deleteUserModal.show(row)
+    deleteGameModal.show(row)
   }
-
 
 
   return (
     <>
 
       <Table
-        name="users"
+        name="games"
         tableDataQuery={tableDataQuery}
-        createNewItem={createUserModal.show}
+        createNewItem={createGameModal.show}
         editRowItem={handleeditRowItem}
         deleteRow={handleDeleteRow}
       />
 
-      {createUserModal.render()}
-      {editUserModal.render()}
-      {deleteUserModal.render()}
+      {createGameModal.render()}
+      {editGameModal.render()}
+      {deleteGameModal.render()}
     </>
 
   )
 }
 
-export default Users
+export default Games

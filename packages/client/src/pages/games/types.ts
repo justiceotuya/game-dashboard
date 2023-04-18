@@ -1,8 +1,6 @@
-export type TUserProfile = {
+export type TGameProfile = {
     id?: string
-    email: string
-    first_name: string
-    last_name: string
-    address: string
-    phone_number:string
+    name: string
+    description: string
+    category: string
 }

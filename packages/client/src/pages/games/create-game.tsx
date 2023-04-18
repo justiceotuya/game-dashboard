@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import Input from '../../components/input'
-import UserForm from './user-form'
-import { TUserProfile } from './types'
-import { useCreateUser } from './hooks/useCreateGame'
+import GameForm from './game-form'
+import { TGameProfile } from './types'
+import { useCreateGame } from './hooks/useCreateGame'
 import { useNavigate } from 'react-router-dom'
 import Modal from '../../components/modal'
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
   closeModal: () => void
 }
 
-export const useCreateUserModal = () => {
+export const useCreateGameModal = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   const close = () => {
@@ -21,22 +21,22 @@ export const useCreateUserModal = () => {
     setIsOpen(true)
   }
   const render = () => {
-    return <CreateUser isOpen={isOpen} closeModal={close} />
+    return <CreateGame isOpen={isOpen} closeModal={close} />
   }
 
   return { render, show }
 }
 
-const CreateUser = (props: Props) => {
+const CreateGame = (props: Props) => {
 
   const { isOpen, closeModal } = props;
-  const { isLoading, mutate: createUser } = useCreateUser()
+  const { isLoading, mutate: createGame } = useCreateGame()
   const navigate = useNavigate()
 
-  const handleCreateUser = (values: TUserProfile) => {
-    createUser(values, {
+  const handleCreateGame = (values: TGameProfile) => {
+    createGame(values, {
       onSuccess: () => {
-        // navigate("/users")
+        // navigate("/games")
         closeModal()
       }
     })
@@ -46,9 +46,9 @@ const CreateUser = (props: Props) => {
     <>
       <Modal isOpen={isOpen} onRequestClose={closeModal}>
 
-        <UserForm
-          title="Add new user"
-          handleSubmitForm={handleCreateUser}
+        <GameForm
+          title="Add new game"
+          handleSubmitForm={handleCreateGame}
           isLoading={isLoading}
         />
       </Modal>
@@ -58,4 +58,4 @@ const CreateUser = (props: Props) => {
 
 
 
-export default CreateUser
+export default CreateGame
