@@ -1,14 +1,12 @@
-import express from 'express'
-import fs from 'fs';
-import jsonServer, { JsonServerRouter } from 'json-server'
-import clone from 'clone'
-import data from '../db.json';
-import cors from 'cors';
+const jsonServer = require('json-server')
+const clone = require( 'clone')
+const data  = require('../db.json')
+const cors  = require('cors')
 
 
 
 const isProductionEnv = process.env.NODE_ENV === 'production'
-const server:express.Application = jsonServer.create()
+const server = jsonServer.create()
 
 server.use(cors())
 
@@ -27,16 +25,20 @@ server.use((req, _res, next) => {
     req.body.created_at = Date.now()
   }
   // Continue to JSON Server router
-  setTimeout(next, Math.floor( ( Math.random() * 2000 ) + 100 ) );
+  !isProductionEnv ? setTimeout(next, Math.floor( ( Math.random() * 2000 ) + 100 ) ) : next();
 })
 
 
-// server.use(pause(15000));
+server.use(jsonServer.rewriter({
+    '/api/*': '/$1',
+    '/blog/:resource/:id/show': '/:resource/:id'
+}))
 server.use(router)
+
 let PORT = process.env.PORT || 8000;
 server.listen(PORT, () => {
     console.log('JSON Server is running in ' + process.env.NODE_ENV + ' mode, at ' + PORT )
 })
 
 // Export the Server API
-export default server
+module.exports = server

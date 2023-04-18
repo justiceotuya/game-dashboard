@@ -1,29 +1,44 @@
 {
   "users": [
     {
-      "email": "taracur@mailinator.com",
-      "first_name": "Kibo",
-      "last_name": "Jackson",
-      "address": "Alias quibusdam quid",
-      "phone_number": "9889853929",
-      "created_at": 1681791741452,
+      "email": "gyty@mailinator.comwwwww",
+      "first_name": "Britanni",
+      "last_name": "Bass",
+      "address": "Fuga Suscipit volup",
+      "phone_number": "9299299292",
+      "created_at": 1681760796215,
       "id": 1
     }
   ],
   "games": [
     {
-      "name": "jjjjjjPrice Merritt",
-      "description": "Culpa voluptate exp",
-      "category": "Suscipit alias iste ",
-      "created_at": 1681763705158,
+      "name": "Martena Rollins",
+      "description": "Ducimus cumque mole",
+      "category": "Commodo qui laborios",
+      "created_at": 1681842013967,
+      "id": 1
+    }
+  ],
+  "categories": [
+    {
+      "name": "poker",
       "id": 1
     },
     {
-      "name": "Sebastian Richard",
-      "description": "Placeat amet dolor",
-      "category": "Veniam praesentium ",
-      "created_at": 1681763856412,
+      "name": "blackjack",
       "id": 2
+    },
+    {
+      "name": "roulette",
+      "id": 3
+    },
+    {
+      "name": "slots",
+      "id": 4
+    },
+    {
+      "name": "craps",
+      "id": 5
     }
   ]
 }

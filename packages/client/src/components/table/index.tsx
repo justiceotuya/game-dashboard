@@ -1,12 +1,10 @@
-import { PencilSquareIcon, TrashIcon, PlusIcon } from '@heroicons/react/24/outline'
-import { formatPhoneNumber, toSentenceCase } from '../../utils'
+import { toSentenceCase } from '../../utils'
 import { UseQueryResult } from '@tanstack/react-query'
-import { ReactComponent as FunnelIcon } from '../../assets/funnel.svg'
-import Button from '../button'
 import EmptyTable from './empty-table'
 import TableSkeleton from '../table-skeleton'
 import ErrorContainer from '../error-container'
 import TableRow from './table-row'
+import TableControl from './table-control'
 type Props = {
   name: string
   createNewItem: () => void;
@@ -23,48 +21,13 @@ const Table = (props: Props) => {
   const keys = data?.length ? Object?.keys(data[0]) : null;
   const headers = keys ? keys?.map(toSentenceCase) : []
 
-
-  const handleFormatCell = (key: string, obj: Record<string, any>) => {
-    const value = obj[key]
-    if (key === "phone_number") {
-      return formatPhoneNumber(value)
-    }
-    return value
-  }
-
-  const handleEdit = (row: Record<string, any>) => {
-    editRowItem(row)
-  }
-
-  const handleDeleteRow = (row: Record<string, any>) => {
-    deleteRow(row)
-  }
-
   return (
     <section className="container overflow-hidden mx-auto h-full">
-      <div className="sm:flex sm:items-center sm:justify-between">
-        <h1 className='text-2xl  text-color-accent-1 font-semibold capitalize'>{name}</h1>
-
-        {data && <div className="flex items-center gap-x-3">
-
-          <div className='relative'>
-            <Button
-              text='Filters'
-              icon={<FunnelIcon />}
-              variant='outline'
-            />
-          </div>
-
-          <Button
-            text={`Add new ${name}`}
-            icon={<PlusIcon />}
-            onClick={createNewItem}
-          />
-
-        </div>}
-      </div>
-
-
+      <TableControl
+        data={data}
+        name={name}
+        createNewItem={createNewItem}
+      />
 
       <div className="flex flex-col mt-6 h-full">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 h-full bg-color-white">
@@ -94,7 +57,7 @@ const Table = (props: Props) => {
                           {headers.map((header: any, index: any) =>
                           (
                             <th
-                              key={header}
+                              key={header + index}
                               scope="col"
                               className="px-5 py-3.5 text-sm font-medium text-left rtl:text-right text-color-secondary-1"
                             >
@@ -117,6 +80,7 @@ const Table = (props: Props) => {
                       <tbody className="bg-white divide divide-color-secondary-4  overflow-y-auto">
                         {data.map((rowData, i) => (
                           <TableRow
+                            key={rowData?.id}
                             data={data}
                             rowData={rowData}
                             deleteRow={deleteRow}

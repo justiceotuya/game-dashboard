@@ -7,6 +7,7 @@ export default {
   ],
   theme: {
     colors: {
+
       "color-white": "#FFFFFF",
       "color-primary-1": "#3685D4",
       "color-primary-2": "#2952CC",
@@ -15,6 +16,7 @@ export default {
       "color-secondary-3": "#D8DAE5",
       "color-secondary-4": "#E6E8F0",
       "color-secondary-5": "#F9FAFC",
+      "color-secondary-6": "#8F95B2",
       "color-accent-1": "#101840",
       "color-accent-2": "rgba(16, 24, 64, 0.8)",
       "color-yellow-1": "#66460D",
@@ -28,7 +30,10 @@ export default {
       fontFamily: {
         'sans': ['Inter', ...defaultTheme.fontFamily.sans],
       },
+      boxShadow: {
+        'shadow-sm': '0px 4px 8px 0px rgba(16, 24, 64, 0.15)',
+      },
     },
   },
-  plugins: [],
+ plugins: [require("@tailwindcss/forms")],
 };

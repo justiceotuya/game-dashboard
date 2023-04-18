@@ -2,12 +2,12 @@
   "name": "@justiceotuya/gaming-dashboard-monorepo-server",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/api/server.js",
+  "main": "./dist/server.js",
   "private": true,
-  "scripts": {
+   "scripts": {
     "build": "tsc",
-    "dev": "concurrently \"yarn watch\" \"NODE_ENV=development nodemon -e ts,js --exec ts-node api/server.ts\"",
-    "start": "concurrently \"yarn watch\" \"NODE_ENV=production nodemon -e ts,js --exec ts-node ./dist/api/server.js\"",
+    "dev": "concurrently \"yarn watch\" \"NODE_ENV=development nodemon -e ts,js --exec ts-node server.ts\"",
+    "start": "concurrently \"yarn watch\" \"NODE_ENV=production nodemon -e ts,js --exec ts-node ./dist/server.js\"",
     "test": "echo \"Error: no test specified\" && exit 0",
     "watch": "json-server --watch db.json --port=8000"
   },
