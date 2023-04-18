@@ -56,7 +56,7 @@ const Button = (props: ButtonProps) => {
     <button
       type={type}
       className={`
-      group relative inline-flex  justify-center rounded   py-2.5 px-4 text-sm font-medium gap-2 hover:opacity-60 focus:outline-none disabled:opacity-30 disabled:cursor-not-allowed ${defaultStyle()} ${isFullWidth ? 'w-full' : ''}`}
+      relative flex  items-center justify-center rounded   py-2.5 px-4 text-sm font-medium gap-2 hover:opacity-60 focus:outline-none disabled:opacity-30 disabled:cursor-not-allowed ${defaultStyle()} ${isFullWidth ? 'w-full' : ''}`}
       disabled={isLoading || disabled}
       {...rest}
     >
