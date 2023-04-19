@@ -4,12 +4,16 @@ import { ChevronUpIcon } from '@heroicons/react/24/outline'
 import { runFunctionWhenSpaceOrEnterIsClicked } from '../../utils'
 import FilterGroupHeader from './filter-group-header'
 import Checkbox from '../checkbox'
+import { useTable } from '../../context/table'
 
-type Props = {
-    getDateFilterValue: (startDate: any, endDate: any) => void
+export type DateProps = {
+    startDate: Date | null
+    endDate: Date | null
 }
 
-const DateFilter = ({ getDateFilterValue }: Props) => {
+const DateFilter = () => {
+
+    const { getFilterValues } = useTable()
 
     const [isRange, setIsRange] = useState(false)
     const [isCalendarOpen, setIsCalendarOpen] = useState(false)
@@ -30,7 +34,7 @@ const DateFilter = ({ getDateFilterValue }: Props) => {
 
     const setCalenderDate = useCallback((startDate: any, endDate: any) => {
         setDate({ startDate, endDate })
-        getDateFilterValue(startDate, endDate)
+        getFilterValues('date', { startDate, endDate })
     }, [])
 
     return (

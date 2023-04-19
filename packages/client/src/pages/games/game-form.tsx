@@ -4,6 +4,10 @@ import { Formik } from 'formik';
 import Button from '../../components/button';
 import { gameProfile, gameProfileInputs, gameValidationSchema } from './constant';
 import { TGameProfile } from './types';
+import Select from '../../components/select';
+import { useMemo } from 'react';
+import { useGetCategories } from '../../hooks/useGetCategories';
+import TextArea from '../../components/textArea';
 
 interface TGameForm {
     handleSubmitForm: (val: TGameProfile) => void
@@ -15,6 +19,12 @@ interface TGameForm {
 
 const GameForm = (props: TGameForm) => {
     const { handleSubmitForm, isLoading, gameProfileFromServer, title } = props
+
+    const { data: categoryData } = useGetCategories()
+
+    const categories = useMemo(() => {
+        return categoryData?.map((item: { name: string }) => item.name)
+    }, [categoryData])
 
     return (
         <div className=" mb-5  mx-auto bg-color-white fixed right-0 top-0 bottom-0 h-screen max-w-[480px] w-full py-6 px-10">
@@ -31,19 +41,31 @@ const GameForm = (props: TGameForm) => {
                             <div className='flex flex-col gap-3 mb-6'>
                                 {gameProfileInputs.map((value) => {
                                     const { name, type, label, placeholder } = value
+
+                                    const propsValue = {
+                                        key: name,
+                                        required: true,
+                                        error: formik.touched[name as keyof typeof gameProfile] && formik.errors[name as keyof typeof gameProfile],
+                                        onChange: formik.handleChange,
+                                        onBlur: formik.handleBlur,
+                                        disabled: isLoading,
+                                        value: formik.values[name as keyof typeof gameProfile],
+                                        ...value
+                                    }
+
+                                    if (type === "select") {
+                                        return <Select
+                                            options={categories || []}
+                                            {...propsValue}
+                                        />
+                                    } if (type === "textarea") {
+                                        return <TextArea
+                                            {...propsValue}
+                                        />
+                                    }
                                     return (
                                         <Input
-                                            key={name}
-                                            name={name}
-                                            type={type}
-                                            label={label}
-                                            placeholder={placeholder}
-                                            required
-                                            error={formik.touched[name as keyof typeof gameProfile] && formik.errors[name as keyof typeof gameProfile]}
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            disabled={isLoading}
-                                            value={formik.values[name as keyof typeof gameProfile]}
+                                            {...propsValue}
                                         />
                                     )
                                 }

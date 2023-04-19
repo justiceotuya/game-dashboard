@@ -5,6 +5,9 @@ import TableSkeleton from '../table-skeleton'
 import ErrorContainer from '../error-container'
 import TableRow from './table-row'
 import TableControl from './table-control'
+import { useCallback, useEffect, useState } from 'react'
+import { TFilterValues } from '../table-filter'
+import { DateProps } from '../table-filter/date-filter'
 type Props = {
   name: string
   createNewItem: () => void;
@@ -17,16 +20,30 @@ const Table = (props: Props) => {
   const { name, createNewItem, editRowItem, deleteRow, tableDataQuery } = props
 
   const { data, isLoading, error, refetch } = tableDataQuery
+  const [filteredData, setFilteredData] = useState(data)
+
+  useEffect(() => {
+    if (data) {
+      setFilteredData(data)
+    }
+  }, [data])
+
+
+  const handleFilterTableData = () => {
+    setFilteredData(data)
+  }
 
   const keys = data?.length ? Object?.keys(data[0]) : null;
   const headers = keys ? keys?.map(toSentenceCase) : []
 
+
   return (
-    <section className="container overflow-hidden mx-auto h-full">
+    <section className=" overflow-hidden mx-auto h-full">
       <TableControl
-        data={data}
+        data={filteredData}
         name={name}
         createNewItem={createNewItem}
+        handleFilterTableData={handleFilterTableData}
       />
 
       <div className="flex flex-col mt-6 h-full">
@@ -38,8 +55,8 @@ const Table = (props: Props) => {
             {!isLoading && error ? <ErrorContainer refetch={refetch} /> : null}
 
 
-            {data && <>
-              {data.length === 0 && (
+            {filteredData && <>
+              {filteredData.length === 0 && (
                 <EmptyTable
                   name={name}
                   createNewItem={createNewItem}
@@ -47,7 +64,7 @@ const Table = (props: Props) => {
               )}
 
 
-              {data.length > 0 && (
+              {filteredData.length > 0 && (
                 <>
                   <div className="overflow-y-auto h-full">
                     <table className="min-w-full divide divide-color-secondary-4 ">
@@ -78,10 +95,10 @@ const Table = (props: Props) => {
                       </thead>
 
                       <tbody className="bg-white divide divide-color-secondary-4  overflow-y-auto">
-                        {data.map((rowData, i) => (
+                        {filteredData.map((rowData, i) => (
                           <TableRow
                             key={rowData?.id}
-                            data={data}
+                            data={filteredData}
                             rowData={rowData}
                             deleteRow={deleteRow}
                             editRowItem={editRowItem}

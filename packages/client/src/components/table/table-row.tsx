@@ -9,15 +9,44 @@ type Props = {
     editRowItem: (row: Record<string, any>) => void
 }
 
+const categoryItems = ["poker",
+    "blackjack",
+    "roulette",
+    "slots",
+    "craps"]
+
 const TableRow = (props: Props) => {
     const { data, rowData, deleteRow, editRowItem } = props
 
     const keys = data?.length ? Object?.keys(data[0]) : null;
 
+    const assignTags = (category: string) => {
+        switch (category) {
+            case "poker":
+                return "text-[#66460D] bg-[#FFEFD2]";
+            case "blackjack":
+                return "text-[#0F5156] bg-[#D3F5F7]";
+            case "roulette":
+                return "text-[#2952CC] bg-[#D6E0FF]";
+            case "slots":
+                return "text-[#101840] bg-[#D2D8E1]";
+            case "craps":
+                return "text-[#474D66] bg-[#F2F2F2]";
+            default:
+                return "";
+        }
+    }
+
     const handleFormatCell = (key: string, obj: Record<string, any>) => {
         const value = obj[key]
         if (key === "phone_number") {
             return formatPhoneNumber(value)
+        }
+        if (categoryItems.includes(value)) {
+            return <span className={`${assignTags(value)} px-4 py-2 rounded-[4px]`}>{value}</span>
+        }
+        if (key.includes('created')) {
+            return new Date(value).toLocaleString('en-NG', { day: "numeric", year: "numeric", month: "short", hour: 'numeric', minute: 'numeric', hour12: true })
         }
         return value
     }

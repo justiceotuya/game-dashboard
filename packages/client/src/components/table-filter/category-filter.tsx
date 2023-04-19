@@ -1,26 +1,34 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import FilterGroupHeader from './filter-group-header'
 import { ChevronUpIcon } from '@heroicons/react/24/outline'
 import Checkbox from '../checkbox'
+import { useTable } from '../../context/table'
+import { useGetCategories } from '../../hooks/useGetCategories'
 
 const data = {
     header: "Category",
     options: ["A category", "Another category", "Yet another category"]
 }
-type Props = {
-    getTextFilterValues: (values: string[]) => void
-}
-const TextFilter = ({ getTextFilterValues }: Props) => {
+
+const CategoryFilter = () => {
+
+    const { isLoading, data } = useGetCategories()
+
+    const categories = useMemo(() => {
+        return data?.map((item: { name: string }) => item.name)
+    }, [data])
+
+    const { getFilterValues } = useTable()
 
     const [selectedItems, setSelectedItems] = useState<string[]>([])
-    const [isTextFilterOpen, setIsTextFilterOpen] = useState(false)
+    const [isCategoryFilterOpen, setIsCategoryFilterOpen] = useState(false)
 
     useEffect(() => {
         //everytime selected item changes, pass the value via a callback to the TableComponent
-        getTextFilterValues(selectedItems)
+        getFilterValues('categories', selectedItems)
     }, [selectedItems])
 
-    const toggleTextFilter = useCallback(() => setIsTextFilterOpen((open) => !open), [isTextFilterOpen])
+    const toggleCategoryFilter = useCallback(() => setIsCategoryFilterOpen((open) => !open), [isCategoryFilterOpen])
 
     const toggleSelected = useCallback((val: string) => {
         //get index of item from selectedItems
@@ -39,27 +47,30 @@ const TextFilter = ({ getTextFilterValues }: Props) => {
         return selectedItems.includes(item as string)
     }, [selectedItems])
 
+    if (!categories) {
+        return null
+    }
     return (
         <div className='flex flex-col justify-between w-full px-4 py-3  border-b border-b-color-secondary-4 '>
 
             <FilterGroupHeader
-                filterLabel={data.header}
-                isFilterExpanded={isTextFilterOpen}
-                toggleFilter={toggleTextFilter}
+                filterLabel="Category"
+                isFilterExpanded={isCategoryFilterOpen}
+                toggleFilter={toggleCategoryFilter}
             />
             <div
-                className={`${isTextFilterOpen ? 'visible z- flex flex-col gap-2' : 'hidden z-0 opacity-0'}`}
+                className={`${isCategoryFilterOpen ? 'visible z- flex flex-col gap-2' : 'hidden z-0 opacity-0'}`}
             >
                 {
-                    data.options.map((item, _id) => {
-                        return <>
-                            <TextFilterRowItem
+                    categories.map((item: string, _id: number) => {
+                        return (
+                            <CategoryFilterRowItem
                                 key={item + _id}
                                 text={item}
                                 selected={isSelected(item)}
                                 toggleSelected={toggleSelected}
                             />
-                        </>
+                        )
                     })
 
                 }
@@ -75,7 +86,7 @@ type RowProps = {
     toggleSelected: (val: string) => void
 }
 
-const TextFilterRowItem = ({ text, selected, toggleSelected }: RowProps) => {
+const CategoryFilterRowItem = ({ text, selected, toggleSelected }: RowProps) => {
     const onChange = () => {
         toggleSelected(text)
     }
@@ -88,4 +99,4 @@ const TextFilterRowItem = ({ text, selected, toggleSelected }: RowProps) => {
     />
 }
 
-export default TextFilter
+export default CategoryFilter

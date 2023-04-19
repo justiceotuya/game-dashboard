@@ -1,29 +1,32 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Button from '../button'
 import { ReactComponent as FunnelIcon } from '../../assets/funnel.svg'
 import { ChevronUpIcon } from '@heroicons/react/24/outline'
 import { DatePickerWithStartAndEndDate } from '../datepicker'
 import { StartEndDate } from '../datepicker/types'
-import DateFilter from './date-filter'
+import DateFilter, { DateProps } from './date-filter'
 import Checkbox from '../checkbox'
-import TextFilter from './text-filter'
+import CategoryFilter from './category-filter'
 
-type Props = {}
 
-const TableFilter = (props: Props) => {
+export type TFilterValues = { title: string, values: DateProps | string[] }[]
+
+type TableFilterProps = {
+    handleFilterTableData: () => void
+}
+
+const TableFilter = ({ handleFilterTableData }: TableFilterProps) => {
 
     const [isOpen, setIsOpen] = useState(false)
 
-    const getDateFilterValue = useCallback((startDate: any, endDate: any) => {
-        console.log(startDate, endDate)
-    }, [])
-
-    const getTextFilterValues = useCallback((value: any) => {
-        console.log({ value })
+    useEffect(() => {
+        document.addEventListener('click', handleClickOutside)
+        return () => {
+            document.removeEventListener('click', handleClickOutside)
+        }
     }, [])
 
     const toggleFilter = () => setIsOpen(open => !open)
-
 
     const node = useRef<HTMLDivElement>(null);
 
@@ -36,14 +39,12 @@ const TableFilter = (props: Props) => {
         setIsOpen(false)
     };
 
-    useEffect(() => {
-        document.addEventListener('click', handleClickOutside)
 
-        return () => {
-            document.removeEventListener('click', handleClickOutside)
-        }
-    }, [])
 
+    const handleClickDone = () => {
+        handleFilterTableData()
+        setIsOpen(false)
+    }
 
     return (
         <div className='relative' ref={node}>
@@ -58,13 +59,13 @@ const TableFilter = (props: Props) => {
                 <div className='flex justify-between w-full px-4 py-3 border-b border-b-color-secondary-4'>
                     <button className="font-medium text-sm leading-5 text-color-secondary-1" type="button">Clear</button>
                     <h4 className='font-medium leading-6 text-color-accent-1'>Filters</h4>
-                    <button className="font-medium text-sm leading-5 text-color-primary-1" type="button">Done</button>
+                    <button className="font-medium text-sm leading-5 text-color-primary-1" type="button" onClick={handleClickDone}>Done</button>
                 </div>
 
                 <div className='flex flex-col w-full  max-h-[400px] overflow-auto'>
 
-                    <TextFilter getTextFilterValues={getTextFilterValues} />
-                    <DateFilter getDateFilterValue={getDateFilterValue} />
+                    <CategoryFilter />
+                    <DateFilter />
                 </div>
             </div>
         </div>

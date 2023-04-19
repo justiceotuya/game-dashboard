@@ -9,6 +9,7 @@ import {
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Toaster } from 'react-hot-toast';
 import AppRoutes from './routes';
+import { TableProvider } from './context/table';
 
 export const queryClient = new QueryClient()
 
@@ -16,7 +17,9 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AppRoutes/>
+      <TableProvider>
+        <AppRoutes />
+      </TableProvider>
       <ReactQueryDevtools initialIsOpen={false} />
       <Toaster position="top-right" />
     </QueryClientProvider>

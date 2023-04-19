@@ -1,32 +1,43 @@
 import { PlusIcon } from '@heroicons/react/24/outline'
 import { ReactComponent as FunnelIcon } from '../../assets/funnel.svg'
 import Button from '../button'
-import TableFilter from '../table-filter'
+import TableFilter, { TFilterValues } from '../table-filter'
+import { useCallback } from 'react'
 
 type Props = {
     data: Record<string, any>[] | undefined
     name: string
-    createNewItem: () => void;
+    createNewItem: () => void
+    handleFilterTableData: () => void
+
 }
 
 const TableControl = (props: Props) => {
-    const { data, name, createNewItem, } = props
+    const { data, name, createNewItem, handleFilterTableData } = props
+
+    // const handleTableFilter = useCallback((filters: TFilterValues) => {
+    //     console.log({ filters })
+    // }, [])
 
     return (
-        <div className="sm:flex sm:items-center sm:justify-between">
-            <h1 className='text-2xl  text-color-accent-1 font-semibold capitalize'>{name}</h1>
+        <div className='sm:flex sm:items-center sm:justify-between'>
+            <h1 className='text-2xl  text-color-accent-1 font-semibold capitalize'>
+                {name}
+            </h1>
 
-            {data && <div className="flex items-center gap-x-3">
+            {data && (
+                <div className='flex items-center gap-x-3'>
+                    <TableFilter
 
-                <TableFilter />
+                        handleFilterTableData={handleFilterTableData} />
 
-                <Button
-                    text={`Add new ${name}`}
-                    icon={<PlusIcon />}
-                    onClick={createNewItem}
-                />
-
-            </div>}
+                    <Button
+                        text={`Add new ${name}`}
+                        icon={<PlusIcon />}
+                        onClick={createNewItem}
+                    />
+                </div>
+            )}
         </div>
     )
 }
