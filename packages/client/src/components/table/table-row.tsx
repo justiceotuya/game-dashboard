@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { formatPhoneNumber } from '../../utils'
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
 
@@ -7,6 +7,11 @@ type Props = {
     rowData: Record<string, any>
     deleteRow: (row: Record<string, any>) => void
     editRowItem: (row: Record<string, any>) => void
+    headers: {
+        label: string;
+        data_id: string | string[];
+        isStacked?: boolean
+    }[]
 }
 
 const categoryItems = ["poker",
@@ -16,11 +21,10 @@ const categoryItems = ["poker",
     "craps"]
 
 const TableRow = (props: Props) => {
-    const { data, rowData, deleteRow, editRowItem } = props
+    const { headers, rowData, deleteRow, editRowItem } = props
 
-    const keys = data?.length ? Object?.keys(data[0]) : null;
 
-    const assignTags = (category: string) => {
+    const assignTags = useCallback((category: string) => {
         switch (category) {
             case "poker":
                 return "text-[#66460D] bg-[#FFEFD2]";
@@ -35,10 +39,9 @@ const TableRow = (props: Props) => {
             default:
                 return "";
         }
-    }
+    }, [])
 
-    const handleFormatCell = (key: string, obj: Record<string, any>) => {
-        const value = obj[key]
+    const handleFormatCell = useCallback((key: string, value: string) => {
         if (key === "phone_number") {
             return formatPhoneNumber(value)
         }
@@ -49,7 +52,7 @@ const TableRow = (props: Props) => {
             return new Date(value).toLocaleString('en-NG', { day: "numeric", year: "numeric", month: "short", hour: 'numeric', minute: 'numeric', hour12: true })
         }
         return value
-    }
+    }, [])
 
     const handleEdit = (row: Record<string, any>) => {
         editRowItem(row)
@@ -61,31 +64,45 @@ const TableRow = (props: Props) => {
 
     return (
         <tr key={rowData.id} className='border border-color-secondary-4'>
-            {keys && keys.map(key => (
-                <td key={key} className="px-5 py-4 text-sm font-medium whitespace-nowrap  text-color-secondary-2 ">
-                    <p
-                        className="text-sm font-normal text-color-secondary-2 "
-                    >
-                        {handleFormatCell(key, rowData)}
-                    </p>
-                </td>
-            ))}
+            {headers.map(header => {
+                if (Array.isArray(header.data_id)) {
 
-            <td
-                key="##"
-                className="px-4 py-4 text-sm font-medium whitespace-nowrap"
-            >
+                    const key = header.data_id.join("_")
+                    const [firstValue, secondValue] = rowData[key].split("_")
+
+                    return <td
+                        key={key}
+                        className={`px-5 py-4 text-sm font-medium whitespace-break-spaces flex gap-[1px]   text-color-secondary-2  ${header?.isStacked && 'flex-col'}`
+                        }
+                    >
+                        <p className="text-sm  text-color-accent-1">
+                            {handleFormatCell(key, firstValue)}
+                        </p>
+                        <p className="text-xs font-normal text-color-secondary-2">
+                            {handleFormatCell(key, secondValue)}
+                        </p>
+                    </td>
+                } else {
+                    return <td key={header.data_id} className="px-5 py-4 text-sm font-medium whitespace-nowrap  text-color-secondary-2">
+                        <p className="text-sm font-normal text-color-secondary-2">
+                            {handleFormatCell(header.data_id, rowData[header.data_id])}
+                        </p>
+                    </td>
+                }
+            }
+            )}
+
+
+            <td className="px-4 py-4 text-sm font-medium whitespace-nowrap" >
                 <div className="flex items-center gap-x-6">
                     <button
                         title='edit'
                         type="button"
-                        // key={`edit-${row.id}`}
                         className="text-color-secondary-2 transition-colors duration-200 hover:text-color-yellow-1 focus:outline-none"
                         onClick={() => handleEdit(rowData)}
                     >
                         <PencilSquareIcon className="block w-6 h-6" />
                     </button>
-
 
                     <button
                         title='delete'

@@ -5,19 +5,28 @@ import TableSkeleton from '../table-skeleton'
 import ErrorContainer from '../error-container'
 import TableRow from './table-row'
 import TableControl from './table-control'
-import { useCallback, useEffect, useState } from 'react'
-import { TFilterValues } from '../table-filter'
-import { DateProps } from '../table-filter/date-filter'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+
 type Props = {
   name: string
   createNewItem: () => void;
   editRowItem: (row: Record<string, any>) => void
   deleteRow: (row: Record<string, any>) => void
   tableDataQuery: UseQueryResult<Record<string, any>[], unknown>
+  headers: {
+    [key: string]: any;
+    label: string;
+    data_id: string | string[];
+    isStacked?: boolean //if the data should be stacked on the table
+  }[]
+}
+
+interface IMappedDataItem {
+  [key: string]: string | number;
 }
 
 const Table = (props: Props) => {
-  const { name, createNewItem, editRowItem, deleteRow, tableDataQuery } = props
+  const { name, createNewItem, editRowItem, deleteRow, tableDataQuery, headers } = props
 
   const { data, isLoading, error, refetch } = tableDataQuery
   const [filteredData, setFilteredData] = useState(data)
@@ -33,8 +42,22 @@ const Table = (props: Props) => {
     setFilteredData(data)
   }
 
-  const keys = data?.length ? Object?.keys(data[0]) : null;
-  const headers = keys ? keys?.map(toSentenceCase) : []
+
+  const mappedData = useMemo(() => {
+    return filteredData?.map(item => {
+      const mappedItem: IMappedDataItem = {};
+      headers.forEach(header => {
+        if (Array.isArray(header.data_id)) {
+          mappedItem[header.data_id.join("_")]
+            = item[header.data_id[0]] + "_" + item[header.data_id[1]];
+
+        } else {
+          mappedItem[header.data_id] = item[header.data_id];
+        }
+      });
+      return mappedItem;
+    })
+  }, [filteredData])
 
 
   return (
@@ -71,17 +94,17 @@ const Table = (props: Props) => {
                       <thead className="bg-color-secondary-4 sticky top-0">
                         <tr className='border border-color-secondary-4'>
 
-                          {headers.map((header: any, index: any) =>
-                          (
-                            <th
-                              key={header + index}
-                              scope="col"
-                              className="px-5 py-3.5 text-sm font-medium text-left rtl:text-right text-color-secondary-1"
-                            >
-                              {header}
-                            </th>
-                          )
-                          )}
+                          {
+                            headers.map((header) => (
+                              <th
+                                key={header.label}
+                                scope="col"
+                                className="px-5 py-3.5 text-sm font-medium text-left rtl:text-right text-color-secondary-1"
+                              >
+                                {header.label}
+                              </th>
+                            )
+                            )}
 
                           {
                             <th
@@ -95,9 +118,10 @@ const Table = (props: Props) => {
                       </thead>
 
                       <tbody className="bg-white divide divide-color-secondary-4  overflow-y-auto">
-                        {filteredData.map((rowData, i) => (
+                        {mappedData?.map((rowData, i) => (
                           <TableRow
                             key={rowData?.id}
+                            headers={headers}
                             data={filteredData}
                             rowData={rowData}
                             deleteRow={deleteRow}

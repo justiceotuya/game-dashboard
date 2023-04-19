@@ -3,6 +3,7 @@ import { useGetGames } from './hooks/useGetGames'
 import { useCreateGameModal } from './create-game'
 import { useEditModal } from './edit-game'
 import { useDeleteModal } from './delete-game'
+import { useMemo } from 'react'
 
 
 const Games = () => {
@@ -21,6 +22,14 @@ const Games = () => {
     deleteGameModal.show(row)
   }
 
+  const headers = useMemo(() => [
+    { label: "Title", data_id: ["name", "description"], isStacked: true },
+    { label: "Game ID", data_id: "id" },
+    { label: "Category", data_id: "category" },
+    { label: "Created At", data_id: "created_at" },
+  ], [])
+
+
 
   return (
     <>
@@ -31,6 +40,7 @@ const Games = () => {
         createNewItem={createGameModal.show}
         editRowItem={handleeditRowItem}
         deleteRow={handleDeleteRow}
+        headers={headers}
       />
 
       {createGameModal.render()}

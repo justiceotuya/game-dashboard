@@ -26,67 +26,11 @@
       "id": 2
     },
     {
-      "name": "Desirae Walters",
-      "description": "Veniam doloremque n",
-      "category": "roulette",
-      "created_at": 1681863267520,
+      "name": "I am Title",
+      "description": "I am Description",
+      "category": "slots",
+      "created_at": 1681898015809,
       "id": 3
-    },
-    {
-      "name": "Dillon Villarreal",
-      "description": "Harum laborum Labor",
-      "category": "poker",
-      "created_at": 1681863311517,
-      "id": 4
-    },
-    {
-      "name": "Cyrus Day",
-      "description": "Velit laboriosam o",
-      "category": "craps",
-      "created_at": 1681863326730,
-      "id": 5
-    },
-    {
-      "name": "Elvis Bowman",
-      "description": "Vel non laborum in c",
-      "category": "craps",
-      "created_at": 1681863864082,
-      "id": 6
-    },
-    {
-      "name": "Ivan Weber",
-      "description": "Fugiat dolores minim",
-      "category": "roulette",
-      "created_at": 1681863870149,
-      "id": 7
-    },
-    {
-      "name": "Griffin Benjamin",
-      "description": "Atque quis qui offic",
-      "category": "blackjack",
-      "created_at": 1681863882331,
-      "id": 8
-    },
-    {
-      "name": "Caldwell Hickman",
-      "description": "Anim odio consequat",
-      "category": "poker",
-      "created_at": 1681863914085,
-      "id": 9
-    },
-    {
-      "name": "Thomas Morgan",
-      "description": "Repudiandae eaque au",
-      "category": "roulette",
-      "created_at": 1681865078996,
-      "id": 10
-    },
-    {
-      "name": "Lawrence Benjamin",
-      "description": "Ut nobis qui exercit",
-      "category": "roulette",
-      "created_at": 1681865113492,
-      "id": 11
     }
   ],
   "categories": [
