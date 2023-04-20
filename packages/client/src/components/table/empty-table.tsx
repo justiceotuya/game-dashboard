@@ -1,12 +1,9 @@
 import Button from '../button'
 import { PlusIcon } from '@heroicons/react/24/outline'
+import { EmptyTableProps } from './types'
 
-type Props = {
-  createNewItem: () => void
-  name: string
-}
 
-const EmptyTable = (props: Props) => {
+const EmptyTable = (props: EmptyTableProps) => {
 
   const { createNewItem, name } = props
   return (

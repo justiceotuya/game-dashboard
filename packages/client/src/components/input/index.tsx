@@ -1,18 +1,7 @@
 import React, { useState } from 'react'
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
-  label: string
-  required?: boolean
-  disabled?: boolean
-  type: string
-  placeholder?: string
-  name?: string
-  value?: string
-  className?: string
-  error?: string | false
-  optional?: any
-}
+import { InputProps } from './types'
 
-const Input = (props: Props) => {
+const Input = (props: InputProps) => {
   const {
     required = false,
     label,
@@ -23,7 +12,7 @@ const Input = (props: Props) => {
     disabled = false,
     error,
     optional,
-    value
+    value = ""
   } = props
 
 

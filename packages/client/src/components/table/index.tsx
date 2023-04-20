@@ -7,29 +7,12 @@ import TableControl from './table-control'
 import { useEffect, useMemo, useState } from 'react'
 import { useTable } from '../../context/table'
 import dayjs from 'dayjs'
-import * as  IsBetween from 'dayjs/plugin/isBetween'
+import IsBetween from 'dayjs/plugin/isBetween'
+import { IMappedDataItem, TableProps } from './types'
 dayjs.extend(IsBetween)
 
 
-type Props = {
-  name: string
-  createNewItem: () => void;
-  editRowItem: (row: Record<string, any>) => void
-  deleteRow: (row: Record<string, any>) => void
-  tableDataQuery: UseQueryResult<Record<string, any>[], unknown>
-  headers: {
-    [key: string]: any;
-    label: string;
-    data_id: string | string[];
-    isStacked?: boolean //if the data should be stacked on the table
-  }[]
-}
-
-interface IMappedDataItem {
-  [key: string]: string | number;
-}
-
-const Table = (props: Props) => {
+const Table = (props: TableProps) => {
   const { name, createNewItem, editRowItem, deleteRow, tableDataQuery, headers } = props
 
   const { data, isLoading, error, refetch } = tableDataQuery
@@ -130,7 +113,7 @@ const Table = (props: Props) => {
 
               {filteredData.length > 0 && (
                 <>
-                  <div className="overflow-y-auto h-full">
+                  <div className="overflow-y-auto h-[75vh] md:h-[86vh]">
                     <table className="min-w-full divide divide-color-secondary-4 ">
                       <thead className="bg-color-secondary-4 sticky top-0">
                         <tr className='border border-color-secondary-4'>

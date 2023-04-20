@@ -1,7 +1,5 @@
 import * as Yup from 'yup'
 
-
-
 export const gameProfile = {
     name: '',
     description: '',

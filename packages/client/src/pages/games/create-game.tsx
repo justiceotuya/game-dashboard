@@ -1,14 +1,10 @@
-import React, { useState } from 'react'
-import Input from '../../components/input'
+import { useState } from 'react'
 import GameForm from './game-form'
-import { TGameProfile } from './types'
+import { CreateGameProps, TGameProfile } from './types'
 import { useCreateGame } from './hooks/useCreateGame'
 import { useNavigate } from 'react-router-dom'
 import Modal from '../../components/modal'
-type Props = {
-  isOpen: boolean
-  closeModal: () => void
-}
+
 
 export const useCreateGameModal = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -27,16 +23,15 @@ export const useCreateGameModal = () => {
   return { render, show }
 }
 
-const CreateGame = (props: Props) => {
+
+const CreateGame = (props: CreateGameProps) => {
 
   const { isOpen, closeModal } = props;
   const { isLoading, mutate: createGame } = useCreateGame()
-  const navigate = useNavigate()
 
   const handleCreateGame = (values: TGameProfile) => {
     createGame(values, {
       onSuccess: () => {
-        // navigate("/games")
         closeModal()
       }
     })

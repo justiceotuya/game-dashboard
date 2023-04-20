@@ -1,14 +1,10 @@
 import React, { useState } from 'react'
 import Input from '../../components/input'
 import UserForm from './user-form'
-import { TUserProfile } from './types'
+import { CreateUserProps, TUserProfile } from './types'
 import { useCreateUser } from './hooks/useCreateUser'
 import { useNavigate } from 'react-router-dom'
 import Modal from '../../components/modal'
-type Props = {
-  isOpen: boolean
-  closeModal: () => void
-}
 
 export const useCreateUserModal = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -27,7 +23,7 @@ export const useCreateUserModal = () => {
   return { render, show }
 }
 
-const CreateUser = (props: Props) => {
+const CreateUser = (props: CreateUserProps) => {
 
   const { isOpen, closeModal } = props;
   const { isLoading, mutate: createUser } = useCreateUser()

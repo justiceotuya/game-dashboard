@@ -1,21 +1,9 @@
 import React, { useRef, useState } from 'react'
-import UserForm from './user-form'
-import { useLocation, useNavigate, useParams, useRoutes } from 'react-router-dom'
-import { TUserProfile } from './types'
-import { useUpdateUser } from './hooks/useUpdateUser'
-import { useGetOneUser } from './hooks/useGetOneUser'
-import TableSkeleton from '../../components/table-skeleton'
 import { queryClient } from '../../App'
 import Modal from '../../components/modal'
-import CreateUser from './create-user'
 import Button from '../../components/button'
 import { useDeleteUser } from './hooks/useDeleteUser'
-
-type Props = {
-  isOpen: boolean
-  closeModal: () => void
-  userDetails: Record<string, any> | null
-}
+import { DeleteUserProps } from './types'
 
 export const useDeleteModal = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -38,7 +26,7 @@ export const useDeleteModal = () => {
 }
 
 
-const DeleteUser = (props: Props) => {
+const DeleteUser = (props: DeleteUserProps) => {
 
   const { isOpen, closeModal, userDetails } = props;
 

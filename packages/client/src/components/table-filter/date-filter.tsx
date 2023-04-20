@@ -1,15 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { DatePickerWithStartAndEndDate } from '../datepicker'
-import { ChevronUpIcon } from '@heroicons/react/24/outline'
-import { runFunctionWhenSpaceOrEnterIsClicked } from '../../utils'
 import FilterGroupHeader from './filter-group-header'
 import Checkbox from '../checkbox'
 import { useTable } from '../../context/table'
 
-export type DateProps = {
-    startDate: Date | null
-    endDate: Date | null
-}
 
 const DateFilter = ({ isFilterClear }: { isFilterClear: boolean }) => {
 

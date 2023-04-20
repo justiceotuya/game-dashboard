@@ -1,6 +1,4 @@
-import React from 'react'
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
@@ -9,7 +7,7 @@ import Layout from '../components/layout'
 import Dashboard from '../pages/dashboard';
 import Users from '../pages/users';
 import Games from '../pages/games';
-import { ErrorPage } from '../pages/error';
+import { ErrorPage } from '../components/error-container/error';
 
 export const layoutRoutes = [
   { path: "/", element: <Navigate to="/users" replace /> },

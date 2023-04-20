@@ -22,7 +22,7 @@ const Layout = () => {
           id="main-content"
           className="relative w-full min-h-[calc(100vh-4rem)] overflow-y-auto  lg:ml-64"
         >
-          <main className="items-center p-3 mx-auto max-w-[1440px] lg:p-9 md:p-6 h-full">
+          <main className="items-center p-3 mx-auto max-w-[1440px] lg:p-9 md:p-6 h-[calc(100vh-4rem)] md:h-full">
             <Outlet />
           </main>
         </div>

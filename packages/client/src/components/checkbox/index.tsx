@@ -1,13 +1,7 @@
-import React, { InputHTMLAttributes } from 'react'
+import { InputHTMLAttributes } from 'react'
+import { CheckboxProps } from './types'
 
-type Props = {
-    checked: boolean
-    onChange: (val?: string) => void
-    text?: string
-    name: string
-}
-
-const Checkbox = ({ checked, onChange, text, name }: Props) => {
+const Checkbox = ({ checked, onChange, text, name }: CheckboxProps) => {
     const toggleCheckbox = (
         e: InputHTMLAttributes<HTMLInputElement>,
         val?: string

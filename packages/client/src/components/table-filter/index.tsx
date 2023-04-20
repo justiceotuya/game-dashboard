@@ -1,16 +1,11 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Button from '../button'
 import { ReactComponent as FunnelIcon } from '../../assets/funnel.svg'
-import DateFilter, { DateProps } from './date-filter'
+import DateFilter from './date-filter'
 import CategoryFilter from './category-filter'
 import { useTable } from '../../context/table'
+import { TableFilterProps } from './types'
 
-export type TFilterValues = { title: string, values: DateProps | string[] }[]
-
-type TableFilterProps = {
-    handleFilterTableData: () => void
-    data: Record<string, any>[]
-}
 
 const TableFilter = ({ handleFilterTableData, data }: TableFilterProps) => {
 
@@ -68,6 +63,7 @@ const TableFilter = ({ handleFilterTableData, data }: TableFilterProps) => {
             />
 
             <div className={`shadow-shadow-sm bg-color-white rounded-lg w-[calc(100vw-30px)] md:w-[300px] max-w-[300px] left-0 md:left-[unset] absolute z-20 md:right-0 ${isFilterOpen ? 'block translate-y-2.5' : 'hidden'}`}>
+
                 <div className='flex justify-between w-full px-4 py-3 border-b border-b-color-secondary-4'>
                     <button className="font-medium text-sm leading-5 text-color-secondary-1" type="button" onClick={handleClearFilter}>Clear</button>
 
@@ -78,6 +74,7 @@ const TableFilter = ({ handleFilterTableData, data }: TableFilterProps) => {
                 <div className='flex flex-col w-full  max-h-[400px] overflow-auto'>
 
                     {doesTableHaveCategory && <CategoryFilter isFilterClear={isFilterClear} />}
+
                     {doesTableHaveDate && <DateFilter isFilterClear={isFilterClear} />}
                 </div>
             </div>

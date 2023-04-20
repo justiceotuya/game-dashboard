@@ -1,5 +1,6 @@
 import { createContext, useContext, useRef } from 'react';
-import { DateProps } from '../components/table-filter/date-filter';
+import { DateProps } from '../components/table-filter/types';
+
 
 interface TableContextValue {
     setFilterConfig: (title: string, value: DateProps | string[]) => void
@@ -10,7 +11,9 @@ interface TableContextValue {
 export const TableContext = createContext<TableContextValue | null>(null);
 
 export function TableProvider({ children }: { children: React.ReactNode }) {
+
     const filterConfig = useRef<Record<string, any>>({})
+
     const setFilterConfig = (title: string, value: DateProps | string[]) => {
         filterConfig.current[title] = value
     }

@@ -1,10 +1,8 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { ReactComponent as LogoIcon } from '../../assets/logo.svg'
+import { SidebarProps } from './types';
 
-type Props = {
-    isSidebarOpen: boolean
-    toggleSideBar: () => void
-}
+
 const dashboardLinks = [
     // { name: 'Dashboard', url: '/dashboard' },
     { name: 'Users', url: '/users' },
@@ -18,7 +16,7 @@ const isPageActive = (url: string) => {
     return window.location.pathname.includes(url)
 }
 
-const Sidebar = (props: Props) => {
+const Sidebar = (props: SidebarProps) => {
     const { isSidebarOpen, toggleSideBar } = props
 
     return (

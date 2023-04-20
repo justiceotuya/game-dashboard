@@ -3,12 +3,7 @@ import { queryClient } from '../../App'
 import Modal from '../../components/modal'
 import Button from '../../components/button'
 import { useDeleteGame } from './hooks/useDeleteGame'
-
-type Props = {
-  isOpen: boolean
-  closeModal: () => void
-  gameDetails: Record<string, any> | null
-}
+import { DeleteGameProps } from './types'
 
 export const useDeleteModal = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -31,7 +26,7 @@ export const useDeleteModal = () => {
 }
 
 
-const DeleteGame = (props: Props) => {
+const DeleteGame = (props: DeleteGameProps) => {
 
   const { isOpen, closeModal, gameDetails } = props;
 
@@ -58,11 +53,15 @@ const DeleteGame = (props: Props) => {
       }
     })
   }
+
   return (
     <Modal isOpen={isOpen} onRequestClose={closeModal} className='flex items-center justify-center'>
+
       <div className='flex items-center justify-center h-screen w-screen' onClick={handleClickOutside}>
+
         <div className='bg-color-white rounded-lg p-8 max-w-[512px] w-full self-center' ref={node}>
           <h2 className='text-lg leading-6 mb-2 font-semibold text-color-accent-1'>Confirm delete</h2>
+
           <p className='text-sm leading-5 mb-8 text-color-secondary-1'>Are you sure you want to delete  <strong>{gameDetails?.first_name} {gameDetails?.last_name}`s</strong> data? This action is permanent and you’ll lose access to this information.</p>
 
           <div className='flex gap-2 justify-end'>

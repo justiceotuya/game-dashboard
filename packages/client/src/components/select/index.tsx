@@ -1,20 +1,7 @@
 import React from 'react'
+import { SelectProps } from './types'
 
-interface Props extends React.InputHTMLAttributes<HTMLSelectElement> {
-  label: string
-  required?: boolean
-  disabled?: boolean
-  type: string
-  placeholder?: string
-  name?: string
-  value?: string
-  className?: string
-  error?: string | false
-  optional?: any
-  options: string[]
-}
-
-const Select = (props: Props) => {
+const Select = (props: SelectProps) => {
 
   const {
     required = false,
@@ -60,8 +47,8 @@ const Select = (props: Props) => {
         >
           <option value="">{placeholder}</option>
           {
-            options.map(item => {
-              return <option key={value} value={item}>{item}</option>
+            options.map((item, _id) => {
+              return <option key={item} value={item}>{item}</option>
             })
           }
         </select>

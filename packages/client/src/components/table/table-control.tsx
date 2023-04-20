@@ -1,20 +1,11 @@
 import { PlusIcon } from '@heroicons/react/24/outline'
-import { ReactComponent as FunnelIcon } from '../../assets/funnel.svg'
 import Button from '../button'
-import TableFilter, { TFilterValues } from '../table-filter'
-import { useCallback } from 'react'
+import TableFilter from '../table-filter'
+import { TableControlProps } from './types'
 
-type Props = {
-    data: Record<string, any>[] | undefined
-    name: string
-    createNewItem: () => void
-    handleFilterTableData: () => void
-}
 
-const TableControl = (props: Props) => {
+const TableControl = (props: TableControlProps) => {
     const { data, name, createNewItem, handleFilterTableData } = props
-
-
 
     return (
         <div className='sm:flex sm:items-center sm:justify-between'>

@@ -1,19 +1,12 @@
 import React, { useState } from 'react'
 import GameForm from './game-form'
-import { useLocation, useNavigate, useParams, useRoutes } from 'react-router-dom'
-import { TGameProfile } from './types'
+import { useNavigate } from 'react-router-dom'
+import { EditGameProps, TGameProfile } from './types'
 import { useUpdateGame } from './hooks/useUpdateGame'
 import { useGetOneGame } from './hooks/useGetOneGame'
-import TableSkeleton from '../../components/table-skeleton'
 import { queryClient } from '../../App'
 import Modal from '../../components/modal'
-import CreateGame from './create-game'
 
-type Props = {
-  isOpen: boolean
-  closeModal: () => void
-  gameDetails: Record<string, any> | null
-}
 
 export const useEditModal = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -36,7 +29,7 @@ export const useEditModal = () => {
 }
 
 
-const EditGame = (props: Props) => {
+const EditGame = (props: EditGameProps) => {
 
   const { isOpen, closeModal, gameDetails: gameDetailsFromParam } = props;
   const navigate = useNavigate()

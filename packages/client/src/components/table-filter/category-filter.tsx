@@ -53,9 +53,6 @@ const CategoryFilter = ({ isFilterClear }: { isFilterClear: boolean }) => {
 
 
 
-
-
-
     if (!categories) {
         return null
     }

@@ -1,17 +1,13 @@
-import React from 'react'
 import { runFunctionWhenSpaceOrEnterIsClicked } from '../../utils'
 import { ChevronUpIcon } from '@heroicons/react/24/outline'
-type Props = {
-    toggleFilter: () => void
-    isFilterExpanded: boolean
-    filterLabel: string
-}
+import { FilterGroupHeaderProps } from './types'
+
 
 const FilterGroupHeader = ({
     toggleFilter,
     isFilterExpanded,
     filterLabel
-}: Props) => {
+}: FilterGroupHeaderProps) => {
     return (
         <div
             onClick={toggleFilter}

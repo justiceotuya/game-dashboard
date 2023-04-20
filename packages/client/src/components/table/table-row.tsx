@@ -1,18 +1,8 @@
-import React, { useCallback } from 'react'
+import { useCallback } from 'react'
 import { formatPhoneNumber } from '../../utils'
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
+import { TableRowProps } from './types'
 
-type Props = {
-    data: Record<string, any>[]
-    rowData: Record<string, any>
-    deleteRow: (row: Record<string, any>) => void
-    editRowItem: (row: Record<string, any>) => void
-    headers: {
-        label: string;
-        data_id: string | string[];
-        isStacked?: boolean
-    }[]
-}
 
 const categoryItems = ["poker",
     "blackjack",
@@ -20,7 +10,7 @@ const categoryItems = ["poker",
     "slots",
     "craps"]
 
-const TableRow = (props: Props) => {
+const TableRow = (props: TableRowProps) => {
     const { headers, rowData, deleteRow, editRowItem } = props
 
 

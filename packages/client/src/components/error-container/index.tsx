@@ -59,7 +59,6 @@ export function ErrorFallback({ error, resetErrorBoundary }: ErrorFallbackProps)
             isFullWidth={false}
             type="button"
             onClick={resetErrorBoundary}
-          // disabled={isShareLinkOpen}
           />
         </div>
       </div>

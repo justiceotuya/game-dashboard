@@ -1,17 +1,13 @@
 import React, { useState } from 'react'
 import UserForm from './user-form'
 import { useNavigate } from 'react-router-dom'
-import { TUserProfile } from './types'
+import { EditUserProps, TUserProfile } from './types'
 import { useUpdateUser } from './hooks/useUpdateUser'
 import { useGetOneUser } from './hooks/useGetOneUser'
 import { queryClient } from '../../App'
 import Modal from '../../components/modal'
 
-type Props = {
-  isOpen: boolean
-  closeModal: () => void
-  userDetails: Record<string, any> | null
-}
+
 
 export const useEditModal = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -34,7 +30,7 @@ export const useEditModal = () => {
 }
 
 
-const EditUser = (props: Props) => {
+const EditUser = (props: EditUserProps) => {
 
   const { isOpen, closeModal, userDetails: userDetailsFromParam } = props;
   const navigate = useNavigate()

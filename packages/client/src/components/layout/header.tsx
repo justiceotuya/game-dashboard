@@ -1,14 +1,10 @@
 import React, { Fragment, ReactNode, useEffect, useState, useLayoutEffect } from 'react'
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { ReactComponent as LogoIcon } from '../../assets/logo.svg'
+import { HeaderProps } from './types';
 
-type Props = {
-    isSidebarOpen: boolean
-    toggleSideBar: () => void
 
-}
-
-const Header = (props: Props) => {
+const Header = (props: HeaderProps) => {
     const { isSidebarOpen, toggleSideBar } = props
     return (
         <nav className="lg:hidden fixed z-30 w-full h-16 border-b leading-tight border-color-secondary-4">

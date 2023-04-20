@@ -11,15 +11,6 @@ interface IModalProps extends Props {
     overlayColor?: string;
 }
 
-// const ReactModal = styled(ReactModal)`
-//     width: 100%;
-//     height: fit-content;
-//     margin: 0 auto;
-
-//     @media screen and (min-width: 425px) {
-//         width: fit-content;
-//     }
-// `;
 
 const Modal: React.FC<IModalProps> = ({
     children,
@@ -28,7 +19,7 @@ const Modal: React.FC<IModalProps> = ({
     onRequestClose,
     overlayColor,
 }) => {
-    // const { isOpen, children, onRequestClose } = props;
+
     return (
         <ReactModal
             isOpen={isOpen}
@@ -48,7 +39,7 @@ const Modal: React.FC<IModalProps> = ({
             className="w-full h-fit mx-auto my-0"
         >
             <CloseIcon role="button" tabIndex={0} onClick={onRequestClose}
-            className="fixed h-4 w-4 top-4 right-4 pointer translate-y-0 transition-transform hover:opacity-90 active:translate-y-0.8 "
+                className="fixed z-30 h-5 w-5 top-4 right-4 pointer translate-y-0 transition-transform hover:opacity-90 active:translate-y-0.8 "
             />
             {children}
         </ReactModal>

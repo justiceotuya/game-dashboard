@@ -8,7 +8,6 @@ import { useMemo } from 'react'
 
 
 const Users = () => {
-  const { data, isLoading, error, refetch } = useGetUsers()
   const tableDataQuery = useGetUsers()
 
   const createUserModal = useCreateUserModal()

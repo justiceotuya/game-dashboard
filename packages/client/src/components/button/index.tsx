@@ -1,18 +1,6 @@
 import React, { useCallback } from 'react'
-import { ReactComponent as LoadingIcon } from '../../assets/loading_icon.svg'
 import Loader from '../Loader'
-
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  icon?: JSX.Element
-  text: string
-  disabled?: boolean
-  // variant?: 'primary' | 'disabled'
-  variant?: 'primary' | 'danger' | 'outline';
-
-  isLoading?: boolean
-  isFullWidth?: boolean
-  // type?: string
-}
+import { ButtonProps } from './types'
 
 const Button = (props: ButtonProps) => {
   const {
