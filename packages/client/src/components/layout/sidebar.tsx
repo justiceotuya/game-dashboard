@@ -1,4 +1,4 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { ReactComponent as LogoIcon } from '../../assets/logo.svg'
 
 type Props = {
@@ -6,7 +6,7 @@ type Props = {
     toggleSideBar: () => void
 }
 const dashboardLinks = [
-    { name: 'Dashboard', url: '/dashboard' },
+    // { name: 'Dashboard', url: '/dashboard' },
     { name: 'Users', url: '/users' },
     { name: 'Games', url: '/games' },
 ]

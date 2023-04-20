@@ -1,11 +1,15 @@
-import { toSentenceCase } from '../../utils'
 import { UseQueryResult } from '@tanstack/react-query'
 import EmptyTable from './empty-table'
 import TableSkeleton from '../table-skeleton'
 import ErrorContainer from '../error-container'
 import TableRow from './table-row'
 import TableControl from './table-control'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useTable } from '../../context/table'
+import dayjs from 'dayjs'
+import * as  IsBetween from 'dayjs/plugin/isBetween'
+dayjs.extend(IsBetween)
+
 
 type Props = {
   name: string
@@ -29,6 +33,9 @@ const Table = (props: Props) => {
   const { name, createNewItem, editRowItem, deleteRow, tableDataQuery, headers } = props
 
   const { data, isLoading, error, refetch } = tableDataQuery
+
+  const { filterConfig } = useTable()
+
   const [filteredData, setFilteredData] = useState(data)
 
   useEffect(() => {
@@ -39,13 +46,14 @@ const Table = (props: Props) => {
 
 
   const handleFilterTableData = () => {
-    setFilteredData(data)
+    let Fdata = filterData(data!, filterConfig.current)
+    setFilteredData(Fdata)
   }
-
 
   const mappedData = useMemo(() => {
     return filteredData?.map(item => {
       const mappedItem: IMappedDataItem = {};
+      // filter through the headers and join header for a table row thatwill display two data items
       headers.forEach(header => {
         if (Array.isArray(header.data_id)) {
           mappedItem[header.data_id.join("_")]
@@ -60,10 +68,43 @@ const Table = (props: Props) => {
   }, [filteredData])
 
 
+  const filterData = (tableData: Record<string, any>[], filterConfig: Record<string, any>) => {
+
+    const selectedCategories = filterConfig?.['category']
+    const dateFilter = filterConfig?.['created_at'];
+
+
+    // Get the start and end dates if they exist
+    const startDate = dateFilter?.startDate && new Date(dateFilter.startDate).getTime();
+    const endDate = dateFilter?.endDate && new Date(dateFilter.endDate).getTime();
+    const isDateEmpty = !startDate && !endDate
+
+    // Filter the data based on the selected categories and date range
+    const filteredData = tableData.filter(item => {
+
+      if (selectedCategories?.length > 0 && !selectedCategories?.includes(item.category)) {
+        return false; // skip if the item's category is not in the selected categories
+      }
+
+      // /only go into this filter if date is set
+      if (!isDateEmpty) {
+        if (!endDate) {
+          //skip if item is not created on the same day, if the select is day only
+          return dayjs(item.created_at).isSame(startDate, 'day')
+        }
+
+        return dayjs(item.created_at).isBetween(startDate, endDate, 'day', '[]')
+      }
+      return true; // include the item in the filtered array
+    });
+    return filteredData;
+  };
+
+
   return (
     <section className=" overflow-hidden mx-auto h-full">
       <TableControl
-        data={filteredData}
+        data={data}
         name={name}
         createNewItem={createNewItem}
         handleFilterTableData={handleFilterTableData}

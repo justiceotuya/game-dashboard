@@ -1,33 +1,29 @@
-import { createContext, useCallback, useContext, useState } from 'react';
-import { TFilterValues } from '../components/table-filter';
+import { createContext, useContext, useRef } from 'react';
 import { DateProps } from '../components/table-filter/date-filter';
 
 interface TableContextValue {
-    getFilterValues: (title: string, values: DateProps | string[]) => void
-    filterValues: TFilterValues
-
+    setFilterConfig: (title: string, value: DateProps | string[]) => void
+    clearFilterConfig: () => void
+    filterConfig: Record<string, any>
 }
 
 export const TableContext = createContext<TableContextValue | null>(null);
 
 export function TableProvider({ children }: { children: React.ReactNode }) {
-    const [filterValues, setFilterValues] = useState<TFilterValues>([])
+    const filterConfig = useRef<Record<string, any>>({})
+    const setFilterConfig = (title: string, value: DateProps | string[]) => {
+        filterConfig.current[title] = value
+    }
 
-    const getFilterValues = useCallback((title: string, values: DateProps | string[]) => {
-        //get index of item
-        const itemIndex = filterValues.findIndex(item => item.title === title)
-        if (itemIndex === -1) {
-            setFilterValues([...filterValues, { title, values }])
-        } else {
-            let newFilterValues = [...filterValues]
-            newFilterValues[itemIndex] = { title, values }
-            setFilterValues(newFilterValues)
-        }
-    }, [filterValues])
+    const clearFilterConfig = () => {
+        filterConfig.current = {}
+    }
+
 
     return <TableContext.Provider value={{
-        getFilterValues,
-        filterValues
+        setFilterConfig,
+        filterConfig,
+        clearFilterConfig
     }}>{children}</TableContext.Provider>;
 }
 

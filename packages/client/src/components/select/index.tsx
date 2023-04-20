@@ -61,7 +61,7 @@ const Select = (props: Props) => {
           <option value="">{placeholder}</option>
           {
             options.map(item => {
-              return <option value={item}>{item}</option>
+              return <option key={value} value={item}>{item}</option>
             })
           }
         </select>

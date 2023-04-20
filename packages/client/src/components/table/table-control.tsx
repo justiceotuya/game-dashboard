@@ -9,15 +9,12 @@ type Props = {
     name: string
     createNewItem: () => void
     handleFilterTableData: () => void
-
 }
 
 const TableControl = (props: Props) => {
     const { data, name, createNewItem, handleFilterTableData } = props
 
-    // const handleTableFilter = useCallback((filters: TFilterValues) => {
-    //     console.log({ filters })
-    // }, [])
+
 
     return (
         <div className='sm:flex sm:items-center sm:justify-between'>
@@ -27,9 +24,7 @@ const TableControl = (props: Props) => {
 
             {data && (
                 <div className='flex items-center gap-x-3'>
-                    <TableFilter
-
-                        handleFilterTableData={handleFilterTableData} />
+                    <TableFilter handleFilterTableData={handleFilterTableData} data={data} />
 
                     <Button
                         text={`Add new ${name}`}

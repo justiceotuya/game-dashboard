@@ -72,19 +72,19 @@ const TableRow = (props: Props) => {
 
                     return <td
                         key={key}
-                        className={`px-5 py-4 text-sm font-medium whitespace-break-spaces flex gap-[1px]   text-color-secondary-2  ${header?.isStacked && 'flex-col'}`
+                        className={`px-5 py-4 text-sm font-medium whitespace-break-spaces flex gap-2   text-color-accent-1 align-baseline ${header?.isStacked && 'flex-col gap-[1px] '}`
                         }
                     >
-                        <p className="text-sm  text-color-accent-1">
+                        <p>
                             {handleFormatCell(key, firstValue)}
                         </p>
-                        <p className="text-xs font-normal text-color-secondary-2">
+                        <p className={header?.isStacked ? 'text-xs text-color-secondary-2 font-normal' : undefined}>
                             {handleFormatCell(key, secondValue)}
                         </p>
                     </td>
                 } else {
-                    return <td key={header.data_id} className="px-5 py-4 text-sm font-medium whitespace-nowrap  text-color-secondary-2">
-                        <p className="text-sm font-normal text-color-secondary-2">
+                    return <td key={header.data_id} className="px-5 py-4 text-sm font-medium whitespace-break-spaces  text-color-secondary-2 align-baseline">
+                        <p className="text-sm font-normal text-color-secondary-2 max-w-[200px] ">
                             {handleFormatCell(header.data_id, rowData[header.data_id])}
                         </p>
                     </td>
@@ -93,7 +93,7 @@ const TableRow = (props: Props) => {
             )}
 
 
-            <td className="px-4 py-4 text-sm font-medium whitespace-nowrap" >
+            <td className="px-4 py-4 text-sm font-medium whitespace-nowrap align-baseline" >
                 <div className="flex items-center gap-x-6">
                     <button
                         title='edit'

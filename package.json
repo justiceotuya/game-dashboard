@@ -18,5 +18,8 @@
       "packages/*"
     ]
   },
-  "packageManager": "yarn@3.0.0"
+  "packageManager": "yarn@3.0.0",
+  "dependencies": {
+    "dayjs": "^1.11.7"
+  }
 }

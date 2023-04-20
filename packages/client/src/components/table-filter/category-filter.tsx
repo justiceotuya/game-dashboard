@@ -1,16 +1,11 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import FilterGroupHeader from './filter-group-header'
-import { ChevronUpIcon } from '@heroicons/react/24/outline'
 import Checkbox from '../checkbox'
 import { useTable } from '../../context/table'
 import { useGetCategories } from '../../hooks/useGetCategories'
 
-const data = {
-    header: "Category",
-    options: ["A category", "Another category", "Yet another category"]
-}
 
-const CategoryFilter = () => {
+const CategoryFilter = ({ isFilterClear }: { isFilterClear: boolean }) => {
 
     const { isLoading, data } = useGetCategories()
 
@@ -18,15 +13,21 @@ const CategoryFilter = () => {
         return data?.map((item: { name: string }) => item.name)
     }, [data])
 
-    const { getFilterValues } = useTable()
+    const { setFilterConfig } = useTable()
 
     const [selectedItems, setSelectedItems] = useState<string[]>([])
     const [isCategoryFilterOpen, setIsCategoryFilterOpen] = useState(false)
 
     useEffect(() => {
         //everytime selected item changes, pass the value via a callback to the TableComponent
-        getFilterValues('categories', selectedItems)
+        setFilterConfig("category", selectedItems)
     }, [selectedItems])
+
+    useEffect(() => {
+        if (isFilterClear) {
+            setSelectedItems([])
+        }
+    }, [isFilterClear])
 
     const toggleCategoryFilter = useCallback(() => setIsCategoryFilterOpen((open) => !open), [isCategoryFilterOpen])
 
@@ -35,17 +36,25 @@ const CategoryFilter = () => {
         let itemIndex = selectedItems.findIndex(item => item === val)
         //if item not found, add to selected index else remove
         if (itemIndex === -1) {
-            setSelectedItems([...selectedItems, val])
+            let newSelectedItem = [...selectedItems, val]
+            setSelectedItems(newSelectedItem)
+
         } else {
             let newSelectedItems = [...selectedItems]
-            newSelectedItems.splice(itemIndex, 1)
+            newSelectedItems.splice(itemIndex, 1)[0]
             setSelectedItems(newSelectedItems)
+
         }
     }, [selectedItems])
 
     const isSelected = useCallback((item: string) => {
         return selectedItems.includes(item as string)
     }, [selectedItems])
+
+
+
+
+
 
     if (!categories) {
         return null

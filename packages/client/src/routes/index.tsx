@@ -12,8 +12,8 @@ import Games from '../pages/games';
 import { ErrorPage } from '../pages/error';
 
 export const layoutRoutes = [
-  { path: "/", element: <Navigate to="/dashboard" replace /> },
-  { path: "/dashboard", element: <Dashboard /> },
+  { path: "/", element: <Navigate to="/users" replace /> },
+  // { path: "/dashboard", element: <Dashboard /> },
   { path: "/users", element: <Users /> },
   { path: "/games", element: <Games /> },
 ]

@@ -1,19 +1,27 @@
 import { useState } from 'react'
 import {
-  useQuery,
-  useMutation,
-  useQueryClient,
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { Toaster } from 'react-hot-toast';
+import { Toaster, toast } from 'react-hot-toast';
 import AppRoutes from './routes';
 import { TableProvider } from './context/table';
 import { ErrorBoundary } from 'react-error-boundary'
 import { ErrorFallback } from './components/error-container';
-export const queryClient = new QueryClient()
 
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false, // default: true
+      retry: false,
+      networkMode: 'always',
+      onError(error: any) {
+        toast.error(error.message)
+      },
+    },
+  },
+})
 function App() {
 
   return (

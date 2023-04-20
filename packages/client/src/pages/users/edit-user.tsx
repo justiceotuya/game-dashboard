@@ -1,18 +1,16 @@
 import React, { useState } from 'react'
 import UserForm from './user-form'
-import { useLocation, useNavigate, useParams, useRoutes } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { TUserProfile } from './types'
 import { useUpdateUser } from './hooks/useUpdateUser'
 import { useGetOneUser } from './hooks/useGetOneUser'
-import TableSkeleton from '../../components/table-skeleton'
 import { queryClient } from '../../App'
 import Modal from '../../components/modal'
-import CreateUser from './create-user'
 
 type Props = {
   isOpen: boolean
   closeModal: () => void
-  userDetails:Record<string, any> | null
+  userDetails: Record<string, any> | null
 }
 
 export const useEditModal = () => {
@@ -36,15 +34,15 @@ export const useEditModal = () => {
 }
 
 
- const EditUser = (props: Props) => {
+const EditUser = (props: Props) => {
 
-  const { isOpen, closeModal, userDetails:userDetailsFromParam } = props;
-   const navigate = useNavigate()
+  const { isOpen, closeModal, userDetails: userDetailsFromParam } = props;
+  const navigate = useNavigate()
 
-   const { isLoading, mutate: updateUser } = useUpdateUser()
-   const { isLoading:isUserDataLoading,data:userData, status } = useGetOneUser(userDetailsFromParam?.id)
+  const { isLoading, mutate: updateUser } = useUpdateUser()
+  const { isLoading: isUserDataLoading, data: userData, status } = useGetOneUser(userDetailsFromParam?.id)
 
-   const userProfile = userData || userDetailsFromParam
+  const userProfile = userData || userDetailsFromParam
   const userLoadError = !userProfile && status === "error"
 
   const handleUpdateUser = (values: TUserProfile) => {
@@ -57,20 +55,20 @@ export const useEditModal = () => {
   }
 
 
-   if (userLoadError) {
-     closeModal()
-     return null
-   }
+  if (userLoadError) {
+    closeModal()
+    return null
+  }
   return (
-      <Modal isOpen={isOpen} onRequestClose={closeModal}>
+    <Modal isOpen={isOpen} onRequestClose={closeModal}>
       <UserForm
         title='Edit User'
         handleSubmitForm={handleUpdateUser}
         isLoading={isLoading}
         userProfileFromServer={userProfile}
-        />
-      </Modal>
+      />
+    </Modal>
   )
- }
+}
 
 export default EditUser

@@ -6,8 +6,89 @@
       "last_name": "Bass",
       "address": "Fuga Suscipit volup",
       "phone_number": "9299299292",
-      "created_at": 1681760796215,
+      "created_at": 1681760766215,
       "id": 1
+    },
+    {
+      "email": "jotuya2@gmail.com",
+      "first_name": "Justice",
+      "last_name": "Otuya",
+      "address": "2 Tunde Adesokan Cl",
+      "phone_number": "8130764107",
+      "created_at": 1681905010609,
+      "id": 2
+    },
+    {
+      "email": "jotuya2@gmail.com",
+      "first_name": "Justice",
+      "last_name": "Otuya",
+      "address": "2 Tunde Adesokan Cl",
+      "phone_number": "8130764107",
+      "created_at": 1681905143404,
+      "id": 4
+    },
+    {
+      "email": "jotuya2@gmail.com",
+      "first_name": "Justice",
+      "last_name": "Otuya",
+      "address": "2 Tunde Adesokan Cl",
+      "phone_number": "8130764107",
+      "created_at": 1681905143404,
+      "id": 5
+    },
+    {
+      "email": "jotuya2@gmail.com",
+      "first_name": "Justice",
+      "last_name": "Otuya",
+      "address": "2 Tunde Adesokan Cl",
+      "phone_number": "8130764107",
+      "created_at": 1681905143404,
+      "id": 6
+    },
+    {
+      "email": "jotuya2@gmail.com",
+      "first_name": "Justice",
+      "last_name": "Otuya",
+      "address": "2 Tunde Adesokan Cl",
+      "phone_number": "8130764107",
+      "created_at": 1681905143404,
+      "id": 7
+    },
+    {
+      "email": "jotuya2@gmail.com",
+      "first_name": "Justice",
+      "last_name": "Otuya",
+      "address": "2 Tunde Adesokan Cl",
+      "phone_number": "8130764107",
+      "created_at": 1681905143404,
+      "id": 8
+    },
+    {
+      "email": "jotuya2@gmail.com",
+      "first_name": "Justice",
+      "last_name": "Otuya",
+      "address": "2 Tunde Adesokan Cl",
+      "phone_number": "8130764107",
+      "created_at": 1681905143404,
+      "id": 9
+    },
+    {
+      "email": "pezenusax@mailinator.com",
+      "first_name": "Alvin 20th",
+      "last_name": "Finley",
+      "address": "Non accusantium tene",
+      "phone_number": "3034343434",
+      "created_at": 1681990766836,
+      "id": 10
+    },
+    {
+      "email": "niquwuz@mailinator.com",
+      "first_name": "Wang",
+      "last_name": "Mcfadden",
+      "address": "Laboriosam ratione ",
+      "phone_number": "4839933454",
+      "created_at": 1681997541300,
+      "id": 11
     }
   ],
   "games": [
@@ -27,10 +108,66 @@
     },
     {
       "name": "I am Title",
-      "description": "I am Description",
-      "category": "slots",
+      "description": "I am Descriptionsdsdsd",
+      "category": "craps",
       "created_at": 1681898015809,
       "id": 3
+    },
+    {
+      "name": "sdsd",
+      "description": "sdsdsd",
+      "category": "poker",
+      "created_at": 1681910441575,
+      "id": 4
+    },
+    {
+      "name": "sdsd",
+      "description": "sdsdsd",
+      "category": "roulette",
+      "created_at": 1681910541575,
+      "id": 5
+    },
+    {
+      "name": "sdsd",
+      "description": "sdsdsd",
+      "category": "craps",
+      "created_at": 1681910641575,
+      "id": 6
+    },
+    {
+      "name": "sdsd",
+      "description": "sdsdsd",
+      "category": "slots",
+      "created_at": 1681910741575,
+      "id": 7
+    },
+    {
+      "name": "sdsd",
+      "description": "sdsdsd",
+      "category": "craps",
+      "created_at": 1681910841575,
+      "id": 8
+    },
+    {
+      "name": "sdsd",
+      "description": "sdsdsd",
+      "category": "roulette",
+      "created_at": 1681910941575,
+      "id": 9
+    },
+    {
+      "name": "Jamal Preston",
+      "description": "Et aliquip suscipit ",
+      "category": "poker",
+      "created_at": 1681935083629,
+      "id": 10
+    },
+    {
+      "name": "Jessamine Abbott",
+      "description": "Tempora sed quis odi",
+      "category": "craps",
+      "created_at": 1681984431762,
+      "id": 11
     }
   ],
   "categories": [

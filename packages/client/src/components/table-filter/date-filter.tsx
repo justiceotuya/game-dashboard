@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { DatePickerWithStartAndEndDate } from '../datepicker'
 import { ChevronUpIcon } from '@heroicons/react/24/outline'
 import { runFunctionWhenSpaceOrEnterIsClicked } from '../../utils'
@@ -11,9 +11,9 @@ export type DateProps = {
     endDate: Date | null
 }
 
-const DateFilter = () => {
+const DateFilter = ({ isFilterClear }: { isFilterClear: boolean }) => {
 
-    const { getFilterValues } = useTable()
+    const { setFilterConfig } = useTable()
 
     const [isRange, setIsRange] = useState(false)
     const [isCalendarOpen, setIsCalendarOpen] = useState(false)
@@ -27,15 +27,33 @@ const DateFilter = () => {
         endDate: null
     })
 
-    const toggleDateRange = () => setIsRange((range) => !range)
+    useEffect(() => {
+        if (isFilterClear) {
+            setDate({
+                startDate: null,
+                endDate: null
+            })
+        }
+    }, [isFilterClear])
+
+    const toggleDateRange = () => setIsRange((range) => {
+        setDate({
+            startDate: null, endDate: null
+        })
+        return !range
+    })
     const toggleCalendar = () => setIsCalendarOpen((open) => !open)
     const toggleDateFilter = () => setIsDateFilterOpen((open) => !open)
 
 
     const setCalenderDate = useCallback((startDate: any, endDate: any) => {
         setDate({ startDate, endDate })
-        getFilterValues('date', { startDate, endDate })
-    }, [])
+        if (startDate === null && endDate === null) {
+            setFilterConfig("created_at", { startDate, endDate })
+        } else {
+            setFilterConfig("created_at", { startDate, endDate })
+        }
+    }, [date.startDate, date.endDate])
 
     return (
         <div className='flex flex-col justify-between w-full px-4 py-3  border-b border-b-color-secondary-4 '>

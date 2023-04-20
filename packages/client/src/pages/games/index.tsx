@@ -13,7 +13,6 @@ const Games = () => {
   const editGameModal = useEditModal()
   const deleteGameModal = useDeleteModal()
 
-
   const handleeditRowItem = (row: Record<string, any>) => {
     editGameModal.show(row)
   }
@@ -26,7 +25,7 @@ const Games = () => {
     { label: "Title", data_id: ["name", "description"], isStacked: true },
     { label: "Game ID", data_id: "id" },
     { label: "Category", data_id: "category" },
-    { label: "Created At", data_id: "created_at" },
+    { label: "Creation date", data_id: "created_at" },
   ], [])
 
 
