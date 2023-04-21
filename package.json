@@ -3,20 +3,24 @@
   "description": "Mono-respository with React client, express server and shared typescript module",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Marius Bongarts",
+  "author": "Justice Otuya",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "yarn workspaces foreach -pi run start",
     "dev": "yarn workspaces foreach -pi run dev",
+    "install": "yarn workspaces foreach -pi run install",
     "build": "yarn workspaces foreach -pti run build",
     "start:server": "yarn workspace @justiceotuya/gaming-dashboard-monorepo-server run start",
-    "start:client": "yarn workspace @justiceotuya/gaming-dashboard-monorepo-client run start"
+    "start:client": "yarn workspace @justiceotuya/gaming-dashboard-monorepo-client run start",
+    "test": "yarn workspace @justiceotuya/gaming-dashboard-monorepo-client run test"
   },
   "workspaces": {
     "packages": [
       "packages/*"
     ]
   },
-  "packageManager": "yarn@3.0.0"
+  "packageManager": "yarn@3.0.0",
+  "dependencies": {
+    "dayjs": "^1.11.7"
+  }
 }

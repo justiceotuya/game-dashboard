@@ -3542,6 +3542,8 @@ fsevents@~2.3.2:
 "gaming-dashboard-monorepo@workspace:.":
   version: 0.0.0-use.local
   resolution: "gaming-dashboard-monorepo@workspace:."
+  dependencies:
+    dayjs: ^1.11.7
   languageName: unknown
   linkType: soft
 
