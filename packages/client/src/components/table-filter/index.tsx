@@ -54,7 +54,8 @@ const TableFilter = ({ handleFilterTableData, data }: TableFilterProps) => {
     const doesTableHaveDate = !!dataRow?.['created_at']
 
     return (
-        <div className='relative' ref={filterNode}>
+
+        <div className='relative' ref={filterNode} data-testid="tableFilter">
             <Button
                 text='Filters'
                 icon={<FunnelIcon />}

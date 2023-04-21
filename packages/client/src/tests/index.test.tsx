@@ -1,37 +1,53 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { getAllByText, getByText, render, renderWithRouter, screen, waitFor } from '../utils/test-utils';
 import App from '../App'
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ErrorFallback } from '../components/error-container';
+import { defaultHandlers, networkErrorHandlers } from '../mocks/handlers';
+import { server } from '../mocks/server';
+import { act } from 'react-dom/test-utils';
+import Users from '../pages/users';
 
-
-// describe('App', () => {
-//     it('renders', async () => {
-//         const result = renderWithRouter(<App />)
-//         // console.log(result)
-//         // check that there is initial load when the app loads
-//         await waitFor(() => expect(screen.findAllByText(/loading/i)).toBeInTheDocument())
-//         // //check that it renders the sidebar which contains users and games
-//         // await waitFor(() => expect(result.findAllByText(/user/i)).toBeInTheDocument())
-//         // await waitFor(() => expect(result.findAllByText(/games/i)).toBeInTheDocument())
-//         // await waitFor(() => expect(result.findAllByText(/Britannidsdsds/i)).toBeInTheDocument())
-
-//     });
-// });
 
 
 describe('App', () => {
-    it('renders without errors', async () => {
-        const { container } = renderWithRouter(<App />)
-        const sidebar = screen.getByTestId("sidebar");
+    beforeEach(() => {
+        act(() => {
+            render(<Users />)
+        });
+    });
 
-        // Check if the container element is a valid HTMLElement
-        if (container instanceof HTMLElement) {
-            expect(sidebar).toBeInTheDocument()
-            await waitFor(() => expect(ErrorFallback).not.toBeInTheDocument())
-        } else {
-            fail('Invalid container element')
-        }
+    afterEach(() => {
+        vi.restoreAllMocks()
+    });
+
+    it('renders loading screen', async () => {
+        expect(screen.getByTestId("loading")).toHaveTextContent("Loading...");
+    });
+
+    it('renders with the header', async () => {
+        await waitFor(() => expect(screen.getByTestId("headerText")).toBeDefined())
+        await waitFor(() => expect(screen.getByTestId("headerText")).toHaveTextContent("users"))
+    });
+
+    it('renders with the ErrorFallback', async () => {
+        await waitFor(() => expect(ErrorFallback).toBeDefined())
+    });
+
+    it('renders with the filters', async () => {
+        await waitFor(() => expect(screen.getByTestId("tableFilter")).toBeDefined())
+    });
+
+    it('renders with the button', async () => {
+        await waitFor(() => expect(screen.findByText("Add new users")).toBeDefined())
+    });
+
+    test('should show error message on error', async () => {
+        server.use(...networkErrorHandlers)
+        render(<App />)
+        const errorMessage = await screen.findByText(/Something went wrong/i)
+        expect(errorMessage).toBeInTheDocument()
     })
+
 })

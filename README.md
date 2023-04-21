@@ -1,13 +1,12 @@
 # Gaming Dashboard Monorepo
 
 This is a monorepository consisting of a React client, an Express server, and a shared TypeScript module. The project is intended to provide a dashboard for gaming statistics and data.
-
 ## Getting Started
 
 To get started with this project, follow these steps:
 
-1. Clone this repository: `$ git clone https://github.com/justiceotuya/gaming-dashboard-monorepo.git`
-2. Navigate to the project directory: `$ cd gaming-dashboard-monorepo`
+1. Clone this repository: `$ git clone https://github.com/justiceotuya/game-dashboard.git`
+2. Navigate to the project directory: `$ cd game-dashboard`
 3. Install the dependencies: `$ yarn install`
 4. Start both server and client  `$ yarn dev` **OR**
 5. Start the server: `$ yarn start:server`

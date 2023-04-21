@@ -9,6 +9,9 @@ import AppRoutes from './routes';
 import { TableProvider } from './context/table';
 import { ErrorBoundary } from 'react-error-boundary'
 import { ErrorFallback } from './components/error-container';
+import { worker } from './mocks/browser'
+
+
 
 export const queryClient = new QueryClient({
   defaultOptions: {

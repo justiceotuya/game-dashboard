@@ -1,6 +1,6 @@
 const TableSkeleton = () => {
   return (
-    <section className=" px-4 mx-auto" data-test-id="loading">
+    <section className=" px-4 mx-auto" data-testid="loading">
       <div className="sm:flex sm:items-center sm:justify-between">
         <div className="flex items-center mt-6 text-center border border-color-secondary-4 rounded-lg h-96  w-full">
           <div className="flex flex-col w-full max-w-sm px-4 mx-auto">

@@ -34,7 +34,7 @@ const Table = (props: TableProps) => {
   }
 
   const mappedData = useMemo(() => {
-    return filteredData?.map(item => {
+    return filteredData?.length && filteredData?.map(item => {
       const mappedItem: IMappedDataItem = {};
       // filter through the headers and join header for a table row thatwill display two data items
       headers.forEach(header => {
@@ -47,7 +47,7 @@ const Table = (props: TableProps) => {
         }
       });
       return mappedItem;
-    })
+    }) || []
   }, [filteredData])
 
 
@@ -142,7 +142,7 @@ const Table = (props: TableProps) => {
                       </thead>
 
                       <tbody className="bg-white divide divide-color-secondary-4  overflow-y-auto">
-                        {mappedData?.map((rowData, i) => (
+                        {mappedData?.length && mappedData?.map((rowData, i) => (
                           <TableRow
                             key={rowData?.id}
                             headers={headers}

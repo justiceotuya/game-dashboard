@@ -9,13 +9,14 @@ const TableControl = (props: TableControlProps) => {
 
     return (
         <div className='sm:flex sm:items-center sm:justify-between'>
-            <h1 className='text-2xl  text-color-accent-1 font-semibold capitalize'>
+            <h1 className='text-2xl  text-color-accent-1 font-semibold capitalize' data-testid="headerText">
                 {name}
             </h1>
 
             {data && (
                 <div className='flex items-center gap-x-3'>
-                    <TableFilter handleFilterTableData={handleFilterTableData} data={data} />
+                    <TableFilter handleFilterTableData={handleFilterTableData} data={data}
+                    />
 
                     <Button
                         text={`Add new ${name}`}
