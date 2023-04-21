@@ -10,5 +10,5 @@ This is a shared mono repo based on this medium article [Share Code between Reac
 2. ##### Start
    `yarn dev`
 
-3. ### Test
+3. #### Test
 4. `yarn test`
