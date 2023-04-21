@@ -12,6 +12,12 @@ export default defineConfig({
       },
     }),
   ],
+   test: {
+   environment: 'jsdom',
+   setupFiles: ['./src/tests/setup.ts'],
+   testMatch: ['../tests/**/*.test.tsx'],
+   globals: true
+ },
   build: {
     rollupOptions: {
       /**

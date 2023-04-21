@@ -23,6 +23,7 @@ const Sidebar = (props: SidebarProps) => {
         <>
             <aside
                 id="sidebar"
+                data-testid="sidebar"
                 className={`fixed top-16 lg:top-0 left-0 z-20 border border-color-secondary-4 bg-color-white flex-col flex-shrink-0 w-64 h-full duration-75 lg:flex transition-width ${isSidebarOpen ? 'flex' : 'hidden'
                     }`}
                 aria-label="Sidebar"
