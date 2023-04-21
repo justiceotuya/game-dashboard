@@ -7,10 +7,11 @@ To get started with this project, follow these steps:
 
 1. Clone this repository: `$ git clone https://github.com/justiceotuya/game-dashboard.git`
 2. Navigate to the project directory: `$ cd game-dashboard`
-3. Install the dependencies: `$ yarn install`
-4. Start both server and client  `$ yarn dev` **OR**
-5. Start the server: `$ yarn start:server`
-6. Start the client: `$ yarn start:client`
+3. make sure you have yarn version >=3 if you dont run `$ yarn set version stable`
+4. Install the dependencies: `$ yarn install`
+5. Start both server and client  `$ yarn dev` **OR**
+6. Start the server: `$ yarn start:server`
+7. Start the client: `$ yarn start:client`
 
 
 The client and server will now be running at http://127.0.0.1:5173/ and http://localhost:8000 respectively.

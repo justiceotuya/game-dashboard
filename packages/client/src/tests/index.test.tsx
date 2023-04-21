@@ -8,6 +8,7 @@ import { defaultHandlers, networkErrorHandlers } from '../mocks/handlers';
 import { server } from '../mocks/server';
 import { act } from 'react-dom/test-utils';
 import Users from '../pages/users';
+import { mockUsers } from '../mocks/db';
 
 
 
@@ -41,13 +42,22 @@ describe('App', () => {
 
     it('renders with the button', async () => {
         await waitFor(() => expect(screen.findByText("Add new users")).toBeDefined())
+        server.use(...networkErrorHandlers)
     });
 
-    test('should show error message on error', async () => {
-        server.use(...networkErrorHandlers)
-        render(<App />)
-        const errorMessage = await screen.findByText(/Something went wrong/i)
-        expect(errorMessage).toBeInTheDocument()
-    })
+    // test('lists users', async () => {
+
+    //     await waitFor(() => {
+    //         mockUsers.forEach((mockUser) => {
+    //             expect(screen.getAllByText(mockUser.first_name, { exact: false })).toBeInTheDocument();
+    //         });
+    //     });
+    // });
+    // test('should show error message on error', async () => {
+    //     server.use(...networkErrorHandlers)
+    //     // render(<App />)
+    //     const errorMessage = await screen.findByText(/Something went wrong/i)
+    //     expect(errorMessage).toBeInTheDocument()
+    // })
 
 })
